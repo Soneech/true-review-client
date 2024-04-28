@@ -1,6 +1,7 @@
 import axios from "axios";
+import baseUrl from "./BaseUrl";
 
-const BASE_URL = "http://localhost:8080/auth";
+const BASE_URL = baseUrl() + "/auth";
 
 const signup = (name, email, password) => {
     return axios
