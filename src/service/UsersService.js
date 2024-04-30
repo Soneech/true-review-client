@@ -8,8 +8,13 @@ const getAllUsers = () => {
     return axios.get(BASE_URL, {headers: authHeader()});
 }
 
+const getUser = (userId) => {
+    return axios.get(BASE_URL + "/" + userId, {headers: authHeader()});
+}
+
 const UsersService = {
-    getAllUsers
+    getAllUsers,
+    getUser
 };
 
 export default UsersService;

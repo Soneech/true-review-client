@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import AuthService from "../service/AuthService";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const RegistrationForm = () => {
     const [name, setName] = useState("");
@@ -28,23 +28,26 @@ const RegistrationForm = () => {
       };
 
     return (
-        <div className="Registration-from Auth-form">
-            <p className="Form-text">Registration</p>
-            <form onSubmit={handleSignup}>
-                <div>
-                    <input name="email" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)}/>
-                </div>
+        <div>
+            <div className="Registration-from Auth-form">
+                <p className="Form-text">Registration</p>
+                <form onSubmit={handleSignup}>
+                    <div>
+                        <input name="email" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)}/>
+                    </div>
 
-                <div>
-                    <input name="name" placeholder="Name" value={name} onChange={(event) => setName(event.target.value)}/>
-                </div>
+                    <div>
+                        <input name="name" placeholder="Name" value={name} onChange={(event) => setName(event.target.value)}/>
+                    </div>
 
-                <div>
-                    <input name="password" type="password" placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)}/>
-                </div>
+                    <div>
+                        <input name="password" type="password" placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)}/>
+                    </div>
 
-                <button type="submit" className="Auth-form-btn">Sign Up</button>
-            </form>
+                    <button type="submit" className="Auth-form-btn">Sign Up</button>
+                </form>
+            </div>
+            <p>Already have an account? <Link to="/auth/login" className="Suggestion-link">Sign In</Link></p>
         </div>
     )
 }

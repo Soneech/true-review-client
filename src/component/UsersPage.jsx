@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import UsersService from "../service/UsersService";
 
 const UsersPage = () => {
     const [users, setUsers] = useState([]);
-
-    const navigate = useNavigate();
 
     useEffect(() => {
         UsersService.getAllUsers().then(
@@ -21,16 +19,18 @@ const UsersPage = () => {
 
     return(
         <div className="Users-div">
-            <div>
-                {users.map((user, index) => (
-                    <div key={index}>
-                        <p>{user.name}</p>
-                        {user.roles.map((role, index) => (
-                            <p>{role.name}</p>
-                        ))}
+                {users.map((user, i) => (
+                    <div key={i} className="User-div">
+                        <Link to={{ pathname: `/users/${user.id}` }} className="Users-link"><p>{user.name}</p></Link>
+                        
+                        <p>Привелегии:</p>
+                        <ul className="Roles-list">
+                            {user.roles.map((role, j) => (
+                                <li key={j}>{role.name == "ROLE_USER" ? "Обычный пользователь" : "Администратор"}<br/></li>
+                            ))}
+                        </ul>
                     </div>
                 ))}
-            </div>
 
             {users.length == 0 && (
                 <p>Кажется, у вас недостаточно прав для просмотра этой страницы :(</p>

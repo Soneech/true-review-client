@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import AuthService from "../service/AuthService";
 
 const LoginFrom = () => {
@@ -27,19 +27,23 @@ const LoginFrom = () => {
       };
 
     return (
-        <div className="Login-from Auth-form">
-            <p className="Form-text">Authorization</p>
-            <form onSubmit={handleLogin}>
-                <div>
-                    <input name="email" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)}/>
-                </div>
+        <div>
+            <div className="Login-from Auth-form">
+                <p className="Form-text">Authorization</p>
+                <form onSubmit={handleLogin}>
+                    <div>
+                        <input name="email" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)}/>
+                    </div>
 
-                <div>
-                    <input name="password" type="password" placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)}/>
-                </div>
+                    <div>
+                        <input name="password" type="password" placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)}/>
+                    </div>
 
-                <button type="submit" className="Auth-form-btn">Sign In</button>
-            </form>
+                    <button type="submit" className="Auth-form-btn">Sign In</button>
+                </form>
+            </div>
+
+            <p>Don't have an account? <Link to="/auth/registration" className="Suggestion-link">Sign Up</Link></p>
         </div>
     )
 }
