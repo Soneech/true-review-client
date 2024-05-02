@@ -21,10 +21,14 @@
 
 .Logo-div {
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
   text-align: center;
-  width: 13%;
+  width: 50vw;
+}
+
+.Logo-div a {
+  margin-right: 1.5vw;
 }
 
 .Logo-text {
@@ -165,4 +169,54 @@ ul {
   flex-direction: column;
   align-items: start;
   margin-left: -3vw;
+}
+
+.Categories-block {
+  width: 22vw;
+  margin-right: 2vw;
+}
+
+.Categories-list {
+  border-radius: 6px;
+  background-color: #e7e7e7ad;
+  text-align: start;
+  padding: 5px;
+}
+
+.Categories-link p {
+  margin-left: 7%;
+  margin-top: 5%;
+}
+
+.Home-content {
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.Reviews-block {
+  width: 65vw;
+  margin-left: 5vw;
+}
+
+.Reviews-item {
+  padding: 5px;
+  border-radius: 6px;
+  background-color: #e7e7e7ad;
+  margin-bottom: 15px;
+  text-align: start;
+}
+
+.Reviews-item p {
+  margin-left: 1.5vw;
+}
+
+.Categories-link {
+  color: #434343;
+  transition: 0.4s ease-out;
+}
+
+.Categories-link:hover {
+  color: black;
+  transition: 0.4s ease-out;
 }

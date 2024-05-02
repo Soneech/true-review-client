@@ -29,7 +29,7 @@ const LoginFrom = () => {
     return (
         <div>
             <div className="Login-from Auth-form">
-                <p className="Form-text">Authorization</p>
+                <p className="Form-text">Вход в аккаунт</p>
                 <form onSubmit={handleLogin}>
                     <div>
                         <input name="email" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)}/>
@@ -39,11 +39,11 @@ const LoginFrom = () => {
                         <input name="password" type="password" placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)}/>
                     </div>
 
-                    <button type="submit" className="Auth-form-btn">Sign In</button>
+                    <button type="submit" className="Auth-form-btn">Войти</button>
                 </form>
             </div>
 
-            <p>Don't have an account? <Link to="/auth/registration" className="Suggestion-link">Sign Up</Link></p>
+            <p>Ещё нет аккаунта? <Link to="/auth/registration" className="Suggestion-link">Зарегистрироваться</Link></p>
         </div>
     )
 }

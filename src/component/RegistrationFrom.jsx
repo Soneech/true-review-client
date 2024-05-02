@@ -30,7 +30,7 @@ const RegistrationForm = () => {
     return (
         <div>
             <div className="Registration-from Auth-form">
-                <p className="Form-text">Registration</p>
+                <p className="Form-text">Регистрация</p>
                 <form onSubmit={handleSignup}>
                     <div>
                         <input name="email" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)}/>
@@ -44,10 +44,10 @@ const RegistrationForm = () => {
                         <input name="password" type="password" placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)}/>
                     </div>
 
-                    <button type="submit" className="Auth-form-btn">Sign Up</button>
+                    <button type="submit" className="Auth-form-btn">Зарегистрироваться</button>
                 </form>
             </div>
-            <p>Already have an account? <Link to="/auth/login" className="Suggestion-link">Sign In</Link></p>
+            <p>Уже есть аккаунт? <Link to="/auth/login" className="Suggestion-link">Войти</Link></p>
         </div>
     )
 }
