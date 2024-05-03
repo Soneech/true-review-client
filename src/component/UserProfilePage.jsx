@@ -2,7 +2,6 @@ import React, {useState, useEffect} from "react"
 import { Link, useParams, useNavigate } from "react-router-dom";
 import UsersService from "../service/UsersService";
 import AuthService from "../service/AuthService";
-import ForbiddenComponent from "./ForbiddenComponent";
 
 const UserProfilePage = () => {
     const {id} = useParams();
@@ -17,6 +16,7 @@ const UserProfilePage = () => {
                 console.log(response.data);
             },
             (error) => {
+                logOut();
                 console.log(error);
             }
         );
@@ -27,7 +27,6 @@ const UserProfilePage = () => {
         navigate("/");
         window.location.reload();
     };
-
 
     return (
         <div>
@@ -46,13 +45,9 @@ const UserProfilePage = () => {
                     </ul>
 
                     {id == localStorage.getItem("userId") &&
-                        <button className="Auth-form-btn" onClick={logOut}>Выйти</button>
+                        <button className="Action-btn" onClick={logOut}>Выйти</button>
                     }
                 </div>
-            }
-
-            {user.name == null &&
-                <ForbiddenComponent/>
             }
         </div>
         

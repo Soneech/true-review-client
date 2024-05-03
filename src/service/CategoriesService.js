@@ -12,9 +12,9 @@ const getCategory = (categoryId) => {
     return axios.get(BASE_URL + "/" + categoryId, {headers: authHeader()});
 }
 
-const CategoiesSerivce = {
+const CategoriesSerivce = {
     getAllCategories,
     getCategory
 }
 
-export default CategoiesSerivce;
+export default CategoriesSerivce;

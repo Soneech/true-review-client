@@ -26,7 +26,13 @@ const login = (email, password) => {
             if (response.status == 200) {
                 localStorage.setItem("token", JSON.stringify(response.data.token));
                 localStorage.setItem("userId", JSON.stringify(response.data.user.id));
-                localStorage.setItem("userRoles", JSON.stringify(response.data.user.roles));
+
+                let rolesList = [];
+                response.data.user.roles.forEach((role) => {
+                    rolesList.push(role.name);
+                });
+                
+                localStorage.setItem("userRoles", JSON.stringify(rolesList));
                 localStorage.setItem("isAuthenticated", JSON.stringify(true));
             }
             return response;

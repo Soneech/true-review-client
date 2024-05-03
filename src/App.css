@@ -86,7 +86,7 @@ button:hover {
   background-color: #e7e7e7ad;
 }
 
-.Auth-form-btn {
+.Action-btn {
   height: 5vh;
   margin-top: 15px;
   background-color: #3266e0;
@@ -96,7 +96,7 @@ button:hover {
   padding: 6px 18px;
 }
 
-.Auth-form-btn:hover {
+.Action-btn:hover {
   background-color: #2f6eff;
   color: white;
 }

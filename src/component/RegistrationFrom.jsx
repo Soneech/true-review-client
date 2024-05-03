@@ -44,7 +44,7 @@ const RegistrationForm = () => {
                         <input name="password" type="password" placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)}/>
                     </div>
 
-                    <button type="submit" className="Auth-form-btn">Зарегистрироваться</button>
+                    <button type="submit" className="Action-btn">Зарегистрироваться</button>
                 </form>
             </div>
             <p>Уже есть аккаунт? <Link to="/auth/login" className="Suggestion-link">Войти</Link></p>

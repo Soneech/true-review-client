@@ -39,7 +39,7 @@ const LoginFrom = () => {
                         <input name="password" type="password" placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)}/>
                     </div>
 
-                    <button type="submit" className="Auth-form-btn">Войти</button>
+                    <button type="submit" className="Action-btn">Войти</button>
                 </form>
             </div>
 

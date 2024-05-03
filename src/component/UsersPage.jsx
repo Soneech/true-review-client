@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import UsersService from "../service/UsersService";
+import ForbiddenComponent from "./ForbiddenComponent";
 
 const UsersPage = () => {
     const [users, setUsers] = useState([]);
@@ -33,7 +34,7 @@ const UsersPage = () => {
                 ))}
 
             {users.length == 0 && (
-                <p>Кажется, у вас недостаточно прав для просмотра этой страницы :(</p>
+                <ForbiddenComponent needAuth={false}/>
             )}
         </div>
     )

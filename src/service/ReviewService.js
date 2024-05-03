@@ -13,13 +13,23 @@ const getReveiw = (reviewId) => {
 }
 
 const getUserReviews = (userId) => {
-    return axios.get(BASE_URL + "/user/" + userId + "/reviews", {headers: authHeader()})
+    return axios.get(BASE_URL + "/user/" + userId + "/reviews", {headers: authHeader()});
+}
+
+const getReviewsForCategory = (categoryId) => {
+    return axios.get(BASE_URL + "/categories/" + categoryId + "/reviews", {headers: authHeader()});
+}
+
+const deleteReview = (reviewId) => {
+    return axios.delete(BASE_URL + "/reviews/" + reviewId, {headers: authHeader()});
 }
 
 const ReviewSerivce = {
     getAllReviews,
     getReveiw,
-    getUserReviews
+    getUserReviews,
+    getReviewsForCategory,
+    deleteReview
 }
 
 export default ReviewSerivce;

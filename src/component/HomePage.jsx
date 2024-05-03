@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import CategoiesSerivce from "../service/CategoriesService";
+import ReviewItem from "./ReviewItem";
+import CategoriesSerivce from "../service/CategoriesService";
 import ReviewSerivce from "../service/ReviewService";
 
 const HomePage = () => {
@@ -8,7 +9,7 @@ const HomePage = () => {
     const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
-        CategoiesSerivce.getAllCategories().then(
+        CategoriesSerivce.getAllCategories().then(
             (response) => {
                 setCategories(response.data);
                 console.log(response.data);
@@ -39,10 +40,7 @@ const HomePage = () => {
                 {reviews &&
                     <div className="Reviews-list">
                         {reviews.map((review, index) => (
-                            <div key={index} className="Reviews-item">
-                                 <Link to={{ pathname: `/reviews/${review.id}` }} className="Reviews-link"><p>{review.object_name}</p></Link>
-                                 <p>{review.rating}</p>
-                            </div>
+                            <ReviewItem index={index} review={review}/>
                         ))}
                     </div>
                 }
@@ -56,7 +54,7 @@ const HomePage = () => {
                     <div className="Categories-list">
                         {categories.map((category, index) => (
                             <div key={index} className="Categories-item">
-                                <Link to={{ pathname: `/categories/${category.id}` }} className="Categories-link"><p>{category.name}</p></Link>
+                                <Link to={{ pathname: `/categories/${category.id}/reviews` }} className="Categories-link"><p>{category.name}</p></Link>
                             </div>
                         ))}
                     </div>
