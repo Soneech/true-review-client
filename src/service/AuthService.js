@@ -31,7 +31,7 @@ const login = (email, password) => {
                 response.data.user.roles.forEach((role) => {
                     rolesList.push(role.name);
                 });
-                
+
                 localStorage.setItem("userRoles", JSON.stringify(rolesList));
                 localStorage.setItem("isAuthenticated", JSON.stringify(true));
             }
@@ -44,6 +44,7 @@ const logout = () => {
     localStorage.removeItem("userId");
     localStorage.removeItem("userRoles");
     localStorage.setItem("isAuthenticated", JSON.stringify(false));
+    window.location.reload();
 };
 
 const checkAuthentication = () => {

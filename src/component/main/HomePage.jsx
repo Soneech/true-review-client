@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import ReviewItem from "./ReviewItem";
-import CategoriesSerivce from "../service/CategoriesService";
-import ReviewSerivce from "../service/ReviewService";
+import ReviewItem from "../review/ReviewItem";
+import CategoriesSerivce from "../../service/CategoriesService";
+import ReviewSerivce from "../../service/ReviewService";
+import AuthService from "../../service/AuthService";
 
 const HomePage = () => {
     const [categories, setCategories] = useState([]);
@@ -15,18 +16,20 @@ const HomePage = () => {
                 console.log(response.data);
             },
             (error) => {
+                AuthService.logout();
                 console.log(error);
             }
         );
       }, []);
 
     useEffect(() => {
-        ReviewSerivce.getAllReviews().then(
+        ReviewSerivce.getAllReviews(true).then(
             (response) => {
                 setReviews(response.data);
                 console.log(response);
             },
             (error) => {
+                AuthService.logout();
                 console.log(error);
             }
         )

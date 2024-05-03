@@ -66,11 +66,14 @@ button:hover {
 
 .Auth-div {
   display: flex;
+  justify-content: end;
+  align-items: center;
+  text-align: center;
+  width: 50vw;
 }
 
-.Auth-link {
-  margin: 0px 8px;
-
+.Auth-div a {
+  margin-left: 1.5vw;
 }
 
 .Auth-form {

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ReviewItem from "./ReviewItem";
-import ReviewSerivce from "../service/ReviewService";
-import CategoriesService from "../service/CategoriesService";
+import ReviewSerivce from "../../service/ReviewService";
+import CategoriesService from "../../service/CategoriesService";
 
 const ReviewsList = () => {
     const {id} = useParams();

@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from "react"
 import { Link, useParams, useNavigate } from "react-router-dom";
-import ReviewSerivce from "../service/ReviewService";
-
-import AuthService from "../service/AuthService";
+import ReviewSerivce from "../../service/ReviewService";
+import AuthService from "../../service/AuthService";
 
 const ReviewPage = () => {
     const {id} = useParams();
@@ -22,6 +21,7 @@ const ReviewPage = () => {
             },
             (error) => {
                 console.log(error);
+                logOut();
             }
         );
       }, []);
@@ -46,7 +46,6 @@ const ReviewPage = () => {
       const logOut = () => {
         AuthService.logout();
         navigate("/");
-        window.location.reload();
     };
 
       return(
@@ -85,15 +84,16 @@ const ReviewPage = () => {
                         </div>
                     }
 
-                    {(currentUserId == review.author.id || roles.includes(adminRole)) &&
+                    {(currentUserId == review.author.id || (roles != null && roles.includes(adminRole))) &&
                         <div>
-                            <button onClick={editReview} className="Action-btn">Редактировать</button>
+                            {currentUserId == review.author.id &&
+                                <button onClick={editReview} className="Action-btn">Редактировать</button>
+                            }
                             <button onClick={deleteReview} className="Action-btn">Удалить</button>
                         </div>
                     }
                 </div>
             }
-            
         </div>
       )
 }

@@ -1,13 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import AuthService from "../service/AuthService";
+import AuthService from "../../service/AuthService";
 import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
 
     const [auth, setAuth] = useState(false);
-
     const navigate = useNavigate();
+
+    const currentUserId = localStorage.getItem("userId");
 
     useEffect(() => {
         setNewAuthState();
@@ -15,10 +16,6 @@ const Header = () => {
 
     const setNewAuthState = () => {
         setAuth(AuthService.checkAuthentication());
-    }
-
-    const openProfile = () => {
-        navigate("/users/" + localStorage.getItem("userId"));
     }
 
     return (
@@ -37,13 +34,21 @@ const Header = () => {
                         </Link>
                     )}
                     {!auth && (
-                    <Link to="/auth/registration">
-                        <p className="Sign-up-link Auth-link Header-link">Зарегистрироваться</p>
-                    </Link>
+                        <Link to="/auth/registration">
+                            <p className="Sign-up-link Auth-link Header-link">Зарегистрироваться</p>
+                        </Link>
                     )}
+                    {auth &&
+                        <Link to="/reviews/new">
+                            <p className="Header-link">Написать отзыв</p>    
+                        </Link>
+                    }
                     {auth && (
-                        <p className="Log-out-link Auth-link Header-link" onClick={openProfile}>Профиль</p>
+                        <Link to={{ pathname: `/users/${currentUserId}` }} className="Auth-link Header-link">
+                            <p>Профиль</p>
+                        </Link>
                     )}
+                    
                 </div>
             </div>
         </header>

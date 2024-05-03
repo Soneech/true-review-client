@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react"
 import { Link, useParams, useNavigate } from "react-router-dom";
-import UsersService from "../service/UsersService";
-import AuthService from "../service/AuthService";
+import UsersService from "../../service/UsersService";
+import AuthService from "../../service/AuthService";
 
 const UserProfilePage = () => {
     const {id} = useParams();
@@ -16,7 +16,13 @@ const UserProfilePage = () => {
                 console.log(response.data);
             },
             (error) => {
-                logOut();
+                if (error.response.status == 401 || error.response.status == 405) {
+                    AuthService.logout();
+                    navigate("/");
+                }
+                else if (error.response.status == 404) {
+                    navigate("/");
+                }
                 console.log(error);
             }
         );
@@ -25,7 +31,6 @@ const UserProfilePage = () => {
     const logOut = () => {
         AuthService.logout();
         navigate("/");
-        window.location.reload();
     };
 
     return (

@@ -4,8 +4,11 @@ import baseUrl from "./BaseUrl";
 
 const BASE_URL = baseUrl();
 
-const getAllReviews = () => {
-    return axios.get(BASE_URL + "/reviews", {headers: authHeader()});
+const getAllReviews = (useHeader) => {
+    if (useHeader) {
+        return axios.get(BASE_URL + "/reviews", {headers: authHeader()});
+    }
+    return axios.get(BASE_URL + "/reviews");
 }
 
 const getReveiw = (reviewId) => {
@@ -24,12 +27,17 @@ const deleteReview = (reviewId) => {
     return axios.delete(BASE_URL + "/reviews/" + reviewId, {headers: authHeader()});
 }
 
+const createReview = (review) => {
+    return axios.post(BASE_URL + "/reviews", review, {headers: authHeader()});
+}
+
 const ReviewSerivce = {
     getAllReviews,
     getReveiw,
     getUserReviews,
     getReviewsForCategory,
-    deleteReview
+    deleteReview,
+    createReview
 }
 
 export default ReviewSerivce;

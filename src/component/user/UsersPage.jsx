@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import UsersService from "../service/UsersService";
-import ForbiddenComponent from "./ForbiddenComponent";
+import { Link, useNavigate } from "react-router-dom";
+import UsersService from "../../service/UsersService";
 
 const UsersPage = () => {
     const [users, setUsers] = useState([]);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         UsersService.getAllUsers().then(
@@ -13,6 +14,7 @@ const UsersPage = () => {
                 console.log(response.data);
             },
             (error) => {
+                navigate("/");
                 console.log(error);
             }
         );
@@ -32,10 +34,6 @@ const UsersPage = () => {
                         </ul>
                     </div>
                 ))}
-
-            {users.length == 0 && (
-                <ForbiddenComponent needAuth={false}/>
-            )}
         </div>
     )
 }

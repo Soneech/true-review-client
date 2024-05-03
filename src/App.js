@@ -1,14 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
-import Header from './component/Header';
-import HomePage from './component/HomePage';
-import LoginFrom from './component/LoginForm';
+import Header from './component/main/Header';
+import HomePage from './component/main/HomePage';
+import LoginFrom from './component/auth/LoginForm';
 import AuthService from './service/AuthService';
-import RegistrationForm from './component/RegistrationFrom';
-import UsersPage from './component/UsersPage';
-import UserProfilePage from './component/UserProfilePage';
-import ReviewPage from './component/ReviewPage';
-import ReviewsList from './component/ReviewsList';
+import RegistrationForm from './component/auth/RegistrationFrom';
+import UsersPage from './component/user/UsersPage';
+import UserProfilePage from './component/user/UserProfilePage';
+import ReviewPage from './component/review/ReviewPage';
+import ReviewsList from './component/review/ReviewsList';
+import CreateReviewPage from './component/review/CreateReviewPage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 
@@ -30,6 +31,7 @@ function App() {
               <Route path="/users/:id" element={<UserProfilePage/>}></Route>
               <Route path="/reviews/:id" element={<ReviewPage/>}></Route>
               <Route path="/categories/:id/reviews" element={<ReviewsList/>}></Route>
+              <Route path="/reviews/new" element={<CreateReviewPage/>}></Route>
             </Routes>
         </BrowserRouter>
     </div>
