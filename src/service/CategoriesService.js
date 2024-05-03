@@ -12,9 +12,14 @@ const getCategory = (categoryId) => {
     return axios.get(BASE_URL + "/" + categoryId, {headers: authHeader()});
 }
 
+const updateCategory = (categoryId, name) => {
+    return axios.patch(BASE_URL + "/" + categoryId, {name}, {headers: authHeader()});
+}
+
 const CategoriesSerivce = {
     getAllCategories,
-    getCategory
+    getCategory,
+    updateCategory
 }
 
 export default CategoriesSerivce;
