@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react"
 import { Link, useParams, useNavigate } from "react-router-dom";
 import ReviewSerivce from "../../service/ReviewService";
 import AuthService from "../../service/AuthService";
+import RoleService from "../../service/RoleService";
 
 const ReviewPage = () => {
     const {id} = useParams();
@@ -10,8 +11,7 @@ const ReviewPage = () => {
     const navigate = useNavigate();
 
     const currentUserId = localStorage.getItem("userId");
-    const roles = localStorage.getItem("userRoles");
-    const adminRole = "ROLE_ADMIN"
+    const isAdmin = RoleService.isAdmin();
 
     useEffect(() => {
         ReviewSerivce.getReveiw(id).then(
@@ -84,7 +84,7 @@ const ReviewPage = () => {
                         </div>
                     }
 
-                    {(currentUserId == review.author.id || (roles != null && roles.includes(adminRole))) &&
+                    {(currentUserId == review.author.id || isAdmin) &&
                         <div>
                             {currentUserId == review.author.id &&
                                 <button onClick={editReview} className="Action-btn">Редактировать</button>

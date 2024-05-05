@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import ReviewItem from "./ReviewItem";
 import ReviewSerivce from "../../service/ReviewService";
+import RoleService from "../../service/RoleService";
 import CategoriesService from "../../service/CategoriesService";
 
 const ReviewsList = () => {
@@ -9,8 +10,7 @@ const ReviewsList = () => {
     const [category, setCategory] = useState([]);
     const [reviews, setReviews] = useState([]);
 
-    const adminRole = "ROLE_ADMIN";
-    const roles = localStorage.getItem("userRoles");
+    const isAdmin = RoleService.isAdmin();
 
     useEffect(() => {
         ReviewSerivce.getReviewsForCategory(id).then(
@@ -41,7 +41,7 @@ const ReviewsList = () => {
             {category.name != null &&
                 <div>
                     <p>Отзывы категории: {category.name}</p>
-                    {roles != null && roles.includes(adminRole) &&
+                    {isAdmin &&
                         <Link to={{ pathname: `/categories/${category.id}/update` }}><button className="Action-btn">Изменить</button></Link>
                     }
                 </div>

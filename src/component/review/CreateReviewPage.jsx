@@ -13,10 +13,15 @@ const CreateReviewPage = () => {
     const [categoryId, setCategoryId] = useState("");
 
     const [categories, setCategories] = useState([]);
+    const isAuth = AuthService.checkAuthentication();
 
     const navigate = useNavigate();
 
     useEffect(() => {
+        if (!isAuth) {
+            navigate("/");
+        }
+        
         CategoriesSerivce.getAllCategories().then(
             (response) => {
                 setCategories(response.data);
@@ -41,6 +46,8 @@ const CreateReviewPage = () => {
             category_id: categoryId
         };
 
+        console.log(review);
+
         try {
           await ReviewSerivce.createReview(review).then(
             (response) => {
@@ -49,6 +56,10 @@ const CreateReviewPage = () => {
                 window.location.reload();
             },
             (error) => {
+                if (error.response.status == 401 || error.response.status == 405 || error.response.status == 403 ) {
+                    navigate("/");
+                    AuthService.logout();
+                }
                 console.log(error);
             }
           );
@@ -61,18 +72,37 @@ const CreateReviewPage = () => {
         <div>
             <p>Создание отзыва</p>
             <div>
-                <form>
+                <form onSubmit={handleCreateReview}>
+                    <select onChange={(event) => setCategoryId(event.target.value)}>
+                        { categories.map((category, index) => 
+                            <option key={index} value={category.id} >{category.name}</option>) 
+                        }
+                    </select>
+
                     <div>
                         <input name="object_name" placeholder="Предмет отзыва" value={objectName} onChange={(event) => setObjectName(event.target.value)}/>
                     </div>
 
-                    <div>
-                        <input type="radio" name="rating" placeholder="1" value={rating} onChange={(event) => setRating(event.target.value)}/>
-                        <input type="radio" name="rating" placeholder="2" value={rating} onChange={(event) => setRating(event.target.value)}/>
-                        <input type="radio" name="rating" placeholder="3" value={rating} onChange={(event) => setRating(event.target.value)}/>
-                        <input type="radio" name="rating" placeholder="4" value={rating} onChange={(event) => setRating(event.target.value)}/>
-                        <input type="radio" name="rating" placeholder="5" value={rating} onChange={(event) => setRating(event.target.value)}/>
+                    <div className="Rating-block">
+                        <div className="Rating-area">
+                            <input type="radio" id="star-5" name="rating" value="5" onChange={(event) => setRating(event.target.value)}/>
+                            <label for="star-5" title="Оценка «5»"></label>
+                            
+                            <input type="radio" id="star-4" name="rating" value="4" onChange={(event) => setRating(event.target.value)}/>
+                            <label for="star-4" title="Оценка «4»"></label>
+                                
+                            <input type="radio" id="star-3" name="rating" value="3" onChange={(event) => setRating(event.target.value)}/>
+                            <label for="star-3" title="Оценка «3»"></label>
+
+                            
+                            <input type="radio" id="star-2" name="rating" value="2" onChange={(event) => setRating(event.target.value)}/>
+                            <label for="star-2" title="Оценка «2»"></label>
+
+                            <input type="radio" id="star-1" name="rating" value="1" onChange={(event) => setRating(event.target.value)}/>
+                            <label for="star-1" title="Оценка «1»"></label>
+                        </div>
                     </div>
+                    
 
                     <div>
                         <textarea type="text" name="advantages" placeholder="Достоинства" value={advantages} onChange={(event) => setAdvantages(event.target.value)}/>
@@ -86,7 +116,7 @@ const CreateReviewPage = () => {
                         <textarea name="note" placeholder="Комментарий" value={note} onChange={(event) => setNote(event.target.value)}/>
                     </div>
 
-                    <button type="submit" className="Action-btn">Зарегистрироваться</button>
+                    <button type="submit" className="Action-btn">Создать отзыв</button>
                 </form>
             </div>
         </div>

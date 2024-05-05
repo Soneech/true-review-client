@@ -18,11 +18,8 @@ const UserProfilePage = () => {
             (error) => {
                 if (error.response.status == 401 || error.response.status == 405) {
                     AuthService.logout();
-                    navigate("/");
                 }
-                else if (error.response.status == 404) {
-                    navigate("/");
-                }
+                navigate("/");
                 console.log(error);
             }
         );

@@ -223,3 +223,75 @@ ul {
   color: black;
   transition: 0.4s ease-out;
 }
+
+.Rating-block {
+  display: flex;
+  justify-content: center;
+}
+
+.Rating-area{
+	overflow: hidden;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+.Rating-area:not(:checked) > input {
+	display: none;
+}
+
+.Rating-area:not(:checked) > label {
+	float: right;
+	width: 42px;
+	padding: 0;
+	cursor: pointer;
+	font-size: 32px;
+	line-height: 32px;
+	color: lightgrey;
+
+}
+
+.Rating-area:not(:checked) > label:before {
+	content: '★';
+}
+
+.Rating-area > input:checked ~ label {
+	color: gold;
+}
+
+.Rating-area:not(:checked) > label:hover,
+.Rating-area:not(:checked) > label:hover ~ label {
+	color: gold;
+}
+
+.Rating-area > input:checked + label:hover,
+.Rating-area > input:checked + label:hover ~ label,
+.Rating-area > input:checked ~ label:hover,
+.Rating-area > input:checked ~ label:hover ~ label,
+.Rating-area > label:hover ~ input:checked ~ label {
+	color: gold;
+}
+
+.Rating-area > label:active {
+	position: relative;
+}
+
+.Rating-result {
+  margin-left: 13px;
+}
+
+.Rating-result span {
+	padding: 0;
+	font-size: calc(8px + 2vmin);
+  margin-left: 0.5vw;
+	line-height: 1;
+	color: lightgrey;
+}
+
+.Rating-result > span:before {
+	content: '★';
+}
+
+.Rating-result > span.Active-star {
+	color: gold;
+}
