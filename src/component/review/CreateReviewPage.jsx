@@ -21,10 +21,12 @@ const CreateReviewPage = () => {
         if (!isAuth) {
             navigate("/");
         }
-        
+
         CategoriesSerivce.getAllCategories().then(
             (response) => {
                 setCategories(response.data);
+                setCategoryId(response.data[0].id);
+               
                 console.log(response.data);
             },
             (error) => {
