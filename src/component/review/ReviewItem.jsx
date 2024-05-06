@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+
 const ReviewItem = (props) => {
     const currentUserId = localStorage.getItem("userId");
 
@@ -19,7 +20,7 @@ const ReviewItem = (props) => {
     }
 
     return (
-        <div key={props.index} className="Reviews-item">
+        <div key={props.index} className="Reviews-item Styled-block">
             <Link to={{ pathname: `/reviews/${props.review.id}` }} className="Reviews-link"><p>{props.review.object_name}</p></Link>
             
             <div className="Rating-result">{getRating()}</div>

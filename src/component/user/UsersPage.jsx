@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import UsersService from "../../service/UsersService";
+import UserService from "../../service/UserService";
 
 const UsersPage = () => {
     const [users, setUsers] = useState([]);
 
     const navigate = useNavigate();
+    const userService = new UserService();
 
     useEffect(() => {
-        UsersService.getAllUsers().then(
+        userService.getAllUsers().then(
             (response) => {
                 setUsers(response.data);
                 console.log(response.data);
@@ -21,9 +22,11 @@ const UsersPage = () => {
       }, []);
 
     return(
-        <div className="Users-div">
+        <div className="Users-div Content-block">
+                <p className="Page-header">Пользователи</p>
+
                 {users.map((user, i) => (
-                    <div key={i} className="User-div">
+                    <div key={i} className="User-div Styled-block">
                         <Link to={{ pathname: `/users/${user.id}` }} className="Users-link"><p>{user.name}</p></Link>
                         
                         <p>Привелегии:</p>

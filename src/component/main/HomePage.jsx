@@ -1,47 +1,54 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+
 import ReviewItem from "../review/ReviewItem";
-import CategoriesSerivce from "../../service/CategoriesService";
+
+import CategoryService from "../../service/CategoryService";
 import ReviewSerivce from "../../service/ReviewService";
 import AuthService from "../../service/AuthService";
+
 
 const HomePage = () => {
     const [categories, setCategories] = useState([]);
     const [reviews, setReviews] = useState([]);
 
+    const reviewService = new ReviewSerivce();
+    const categoryService = new CategoryService();
+    const authService = new AuthService();
+
     useEffect(() => {
-        CategoriesSerivce.getAllCategories().then(
+        categoryService.getAllCategories().then(
             (response) => {
                 setCategories(response.data);
                 console.log(response.data);
             },
             (error) => {
-                AuthService.logout();
+                authService.logOut();
                 console.log(error);
             }
         );
       }, []);
 
     useEffect(() => {
-        ReviewSerivce.getAllReviews(true).then(
+        reviewService.getAllReviews(true).then(
             (response) => {
                 setReviews(response.data);
                 console.log(response);
             },
             (error) => {
-                AuthService.logout();
+                authService.logOut();
                 console.log(error);
             }
         )
     }, []);
 
     return (
-        <div className="Home-content">
+        <div className="Home-content Content-block">
             <div className="Reviews-block">
                 <h3>Лента отзывов</h3>
                 
                 {reviews &&
-                    <div className="Reviews-list">
+                    <div className="Reviews-main-list">
                         {reviews.map((review, index) => (
                             <ReviewItem index={index} review={review}/>
                         ))}
@@ -54,7 +61,7 @@ const HomePage = () => {
                 <h3>Категории отзывов</h3>
 
                 {categories && 
-                    <div className="Categories-list">
+                    <div className="Categories-list Styled-block">
                         {categories.map((category, index) => (
                             <div key={index} className="Categories-item">
                                 <Link to={{ pathname: `/categories/${category.id}/reviews` }} className="Categories-link"><p>{category.name}</p></Link>

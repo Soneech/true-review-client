@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import AuthService from "../../service/AuthService";
 import { useNavigate, Link } from "react-router-dom";
+
+import AuthService from "../../service/AuthService";
+
 
 const RegistrationForm = () => {
     const [name, setName] = useState("");
@@ -9,10 +11,12 @@ const RegistrationForm = () => {
 
     const navigate = useNavigate();
 
+    const authService = new AuthService();
+
     const handleSignup = async (event) => {
         event.preventDefault();
         try {
-          await AuthService.signup(name, email, password).then(
+          await authService.signUp(name, email, password).then(
             (response) => {
                 console.log(response);
                 navigate("/auth/login");
@@ -29,7 +33,7 @@ const RegistrationForm = () => {
 
     return (
         <div>
-            <div className="Registration-from Auth-form">
+            <div className="Registration-from Auth-form Styled-block">
                 <p className="Form-text">Регистрация</p>
                 <form onSubmit={handleSignup}>
                     <div>

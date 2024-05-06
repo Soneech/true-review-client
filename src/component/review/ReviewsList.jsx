@@ -1,19 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+
 import ReviewItem from "./ReviewItem";
+
 import ReviewSerivce from "../../service/ReviewService";
-import RoleService from "../../service/RoleService";
-import CategoriesService from "../../service/CategoriesService";
+import CategoryService from "../../service/CategoryService";
+
+import isAdminUser from "../../function/IsAdmin";
+
 
 const ReviewsList = () => {
     const {id} = useParams();
     const [category, setCategory] = useState([]);
     const [reviews, setReviews] = useState([]);
 
-    const isAdmin = RoleService.isAdmin();
+    const isAdmin = isAdminUser();
+
+    const reviewService = new ReviewSerivce();
+    const categoryService = new CategoryService();
 
     useEffect(() => {
-        ReviewSerivce.getReviewsForCategory(id).then(
+        reviewService.getReviewsForCategory(id).then(
             (response) => {
                 setReviews(response.data);
                 console.log(response.data);
@@ -25,7 +32,7 @@ const ReviewsList = () => {
       }, []);
 
     useEffect(() => {
-        CategoriesService.getCategory(id).then(
+        categoryService.getCategory(id).then(
             (response) => {
                 setCategory(response.data);
             },
@@ -36,19 +43,19 @@ const ReviewsList = () => {
     }, []);
 
     return (
-    <div className="Reviews-list-block">
+    <div className="Reviews-list-block Content-block">
         <div className="Reviews-list">
             {category.name != null &&
-                <div>
-                    <p>Отзывы категории: {category.name}</p>
+                <div className="Reviews-category-block">
+                    <p className="Page-header">Отзывы категории: {category.name}</p>
                     {isAdmin &&
-                        <Link to={{ pathname: `/categories/${category.id}/update` }}><button className="Action-btn">Изменить</button></Link>
+                        <Link to={{ pathname: `/categories/${category.id}/update` }}><button className="Action-btn Update-category-button">Изменить</button></Link>
                     }
                 </div>
             }
 
             {reviews &&
-                <div className="Reviews-list">
+                <div className="Reviews-list Wide-block">
                     {reviews.map((review, index) => (
                         <ReviewItem index={index} review={review}/>
                     ))}

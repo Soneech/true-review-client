@@ -1,43 +1,41 @@
 import axios from "axios";
-import authHeader from "./AuthHeader";
-import baseUrl from "./BaseUrl";
+import authHeader from "../function/AuthHeader";
+import baseUrl from "../function/BaseUrl";
 
-const BASE_URL = baseUrl();
+class ReviewService {
+    #serviceBaseUrl;
 
-const getAllReviews = (useHeader) => {
-    if (useHeader) {
-        return axios.get(BASE_URL + "/reviews", {headers: authHeader()});
+    constructor() {
+        this.#serviceBaseUrl = baseUrl();
     }
-    return axios.get(BASE_URL + "/reviews");
+
+    getAllReviews(useHeader) {
+        if (useHeader) {
+            return axios.get(this.#serviceBaseUrl + "/reviews", {headers: authHeader()});
+        }
+        return axios.get(this.#serviceBaseUrl + "/reviews");
+    }
+    
+    getReveiw(reviewId) {
+        return axios.get(this.#serviceBaseUrl + "/reviews/" + reviewId, {headers: authHeader()});
+    }
+    
+    getUserReviews(userId) {
+        return axios.get(this.#serviceBaseUrl + "/user/" + userId + "/reviews", {headers: authHeader()});
+    }
+    
+    getReviewsForCategory(categoryId) {
+        return axios.get(this.#serviceBaseUrl + "/categories/" + categoryId + "/reviews", {headers: authHeader()});
+    }
+    
+    deleteReview(reviewId) {
+        return axios.delete(this.#serviceBaseUrl + "/reviews/" + reviewId, {headers: authHeader()});
+    }
+    
+    createReview(review) {
+        return axios.post(this.#serviceBaseUrl + "/reviews", review, {headers: authHeader()});
+    }
 }
 
-const getReveiw = (reviewId) => {
-    return axios.get(BASE_URL + "/reviews/" + reviewId, {headers: authHeader()});
-}
 
-const getUserReviews = (userId) => {
-    return axios.get(BASE_URL + "/user/" + userId + "/reviews", {headers: authHeader()});
-}
-
-const getReviewsForCategory = (categoryId) => {
-    return axios.get(BASE_URL + "/categories/" + categoryId + "/reviews", {headers: authHeader()});
-}
-
-const deleteReview = (reviewId) => {
-    return axios.delete(BASE_URL + "/reviews/" + reviewId, {headers: authHeader()});
-}
-
-const createReview = (review) => {
-    return axios.post(BASE_URL + "/reviews", review, {headers: authHeader()});
-}
-
-const ReviewSerivce = {
-    getAllReviews,
-    getReveiw,
-    getUserReviews,
-    getReviewsForCategory,
-    deleteReview,
-    createReview
-}
-
-export default ReviewSerivce;
+export default ReviewService;

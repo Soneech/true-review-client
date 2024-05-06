@@ -1,21 +1,23 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
 import AuthService from "../../service/AuthService";
-import { Link, useNavigate } from "react-router-dom";
+
 
 const Header = () => {
-
     const [auth, setAuth] = useState(false);
-    const navigate = useNavigate();
 
     const currentUserId = localStorage.getItem("userId");
+
+    const authService = new AuthService();
 
     useEffect(() => {
         setNewAuthState();
     }, []);
 
     const setNewAuthState = () => {
-        setAuth(AuthService.checkAuthentication());
+        setAuth(authService.checkAuthentication());
     }
 
     return (

@@ -4,8 +4,6 @@
 }
 
 .Categories-list {
-    border-radius: 6px;
-    background-color: #e7e7e7ad;
     text-align: start;
     padding: 5px;
 }
@@ -23,4 +21,16 @@
 .Categories-link:hover {
     color: black;
     transition: 0.4s ease-out;
+}
+
+.Update-category-button {
+    margin-left: 1vw;
+    font-size: small;
+    height: 4vh;
+    text-align: center;
+}
+
+.Update-category-block {
+    padding-top: 20px;
+    padding-bottom: 30px;
 }

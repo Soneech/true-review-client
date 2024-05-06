@@ -79,20 +79,26 @@ button:hover {
   color: white;
 }
 
-input {
+input, textarea {
+  width: 85%;
+}
+
+input, textarea, select {
   margin: 10px 0px;
   font-size: calc(1px + 2vmin);
-  height: 3.4vh;
-  width: 85%;
   border-radius: 3px;
   border: 1px solid #c9c9c9;
 }
 
-input:hover {
+input {
+  height: 3.4vh;
+}
+
+input:hover, textarea:hover, select:hover {
   border: 1px solid #a2a2a2;
 }
 
-input:focus {
+input:focus, textarea:focus, select:focus {
   outline: 1px solid #a2a2a2;
 }
 
@@ -119,12 +125,26 @@ ul {
   margin-left: -3vw;
 }
 
+.Page-header {
+  font-size: calc(2.5px + 2vmin);
+  margin-bottom: 20px;
+}
+
+.Content-block {
+  margin-top: 30px;
+}
+
 .Home-content {
-  margin-top: 25px;
   display: flex;
   justify-content: space-between;
 }
 
-.Reviews-list-block {
-  
+.Styled-block {
+  border-radius: 6px;
+  background-color: #e7e7e7ad;
+}
+
+.Wide-block {
+  width: 74vw;
+  margin: auto;
 }

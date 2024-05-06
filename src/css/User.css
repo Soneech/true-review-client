@@ -1,18 +1,12 @@
 .User-div, .User-info-div {
-    border-radius: 5px;
-    background-color: #e7e7e7ad;
     padding: 20px;
     width: 30%;
     display: flex;
     flex-direction: column;
     align-items: start;
     margin: auto;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     line-height: 0.2;
-}
-  
-.User-div:first-child {
-    margin-top: 40px;
 }
 
 .User-info-div {

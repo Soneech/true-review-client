@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
+
 import ReviewSerivce from "../../service/ReviewService";
-import CategoriesSerivce from "../../service/CategoriesService";
+import CategoryService from "../../service/CategoryService";
 import AuthService from "../../service/AuthService";
+
 
 const CreateReviewPage = () => {
     const [objectName, setObjectName] = useState("");
@@ -13,7 +15,12 @@ const CreateReviewPage = () => {
     const [categoryId, setCategoryId] = useState("");
 
     const [categories, setCategories] = useState([]);
-    const isAuth = AuthService.checkAuthentication();
+
+    const reviewService = new ReviewSerivce();
+    const categoryService = new CategoryService();
+    const authService = new AuthService();
+
+    const isAuth = authService.checkAuthentication();
 
     const navigate = useNavigate();
 
@@ -22,7 +29,7 @@ const CreateReviewPage = () => {
             navigate("/");
         }
 
-        CategoriesSerivce.getAllCategories().then(
+        categoryService.getAllCategories().then(
             (response) => {
                 setCategories(response.data);
                 setCategoryId(response.data[0].id);
@@ -30,7 +37,7 @@ const CreateReviewPage = () => {
                 console.log(response.data);
             },
             (error) => {
-                AuthService.logout();
+                authService.logOut();
                 navigate("/");
                 console.log(error);
             }
@@ -51,7 +58,7 @@ const CreateReviewPage = () => {
         console.log(review);
 
         try {
-          await ReviewSerivce.createReview(review).then(
+          await reviewService.createReview(review).then(
             (response) => {
                 console.log(response);
                 navigate("/");
@@ -60,7 +67,7 @@ const CreateReviewPage = () => {
             (error) => {
                 if (error.response.status == 401 || error.response.status == 405 || error.response.status == 403 ) {
                     navigate("/");
-                    AuthService.logout();
+                    authService.logOut();
                 }
                 console.log(error);
             }
@@ -71,9 +78,9 @@ const CreateReviewPage = () => {
       };
 
       return (
-        <div>
-            <p>Создание отзыва</p>
-            <div>
+        <div className="Content-block">
+            <p className="Page-header">Создание отзыва</p>
+            <div className="Styled-block Wide-block Create-review-block">
                 <form onSubmit={handleCreateReview}>
                     <select onChange={(event) => setCategoryId(event.target.value)}>
                         { categories.map((category, index) => 

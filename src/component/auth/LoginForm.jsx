@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+
 import AuthService from "../../service/AuthService";
 
 const LoginFrom = () => {
@@ -8,10 +9,12 @@ const LoginFrom = () => {
 
     const navigate = useNavigate();
 
+    const authService = new AuthService();
+
     const handleLogin = async (event) => {
         event.preventDefault();
         try {
-            await AuthService.login(email, password).then(
+            await authService.logIn(email, password).then(
                 (response) => {
                     console.log(response);
                     navigate("/");
@@ -28,8 +31,9 @@ const LoginFrom = () => {
 
     return (
         <div>
-            <div className="Login-from Auth-form">
+            <div className="Login-from Auth-form Styled-block">
                 <p className="Form-text">Вход в аккаунт</p>
+
                 <form onSubmit={handleLogin}>
                     <div>
                         <input name="email" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)}/>

@@ -1,8 +1,12 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import CategoriesSerivce from "../../service/CategoriesService";
-import AuthService from "../../service/AuthService";
 import { useParams, useNavigate } from "react-router-dom";
+
+import CategoryService from "../../service/CategoryService";
+import AuthService from "../../service/AuthService";
+
+import isAdminUser from "../../function/IsAdmin";
+
 
 const UpdateCategoryPage = () => {
     const [name, setName] = useState("");
@@ -10,16 +14,16 @@ const UpdateCategoryPage = () => {
     let {id} = useParams();
 
     const navigate = useNavigate();
+    const isAdmin = isAdminUser();
 
-    const adminRole = "ROLE_ADMIN";
-    const roles = localStorage.getItem("userRoles");
-
+    const categoryService = new CategoryService();
+    const authService = new AuthService();
+    
     useEffect(() => {
-        if (roles == null || !roles.includes(adminRole)) {
+        if (!isAdmin) {
             navigate("/");
-        }
-        else {
-            CategoriesSerivce.getCategory(id).then(
+        } else {
+            categoryService.getCategory(id).then(
                 (response) => {
                     setCategory(response.data);
                     setName(response.data.name);
@@ -36,14 +40,14 @@ const UpdateCategoryPage = () => {
     }, []);
     
     const logOut = () => {
-        AuthService.logout();
+        authService.logOut();
         navigate("/");
     };
 
     const handleUpdate = async (event) => {
         event.preventDefault();
         try {
-            await CategoriesSerivce.updateCategory(id, name).then(
+            await categoryService.updateCategory(id, name).then(
                 (response) => {
                     console.log(response);
                     navigate("/categories/" + id + "/reviews");
@@ -58,17 +62,19 @@ const UpdateCategoryPage = () => {
       };
 
       return (
-        <div>
+        <div className="Content-block">
             <div>
-                <p>Обновление категории '{category.name}'</p>
+                <p className="Page-header">Обновление категории '{category.name}'</p>
 
-                <form onSubmit={handleUpdate}>
-                    <div>
-                        <input name="name" placeholder="Название" value={name} onChange={(event) => setName(event.target.value)}/>
-                    </div>
+                <div className="Styled-block Wide-block Update-category-block">
+                    <form onSubmit={handleUpdate}>
+                        <div>
+                            <input name="name" placeholder="Название" value={name} onChange={(event) => setName(event.target.value)}/>
+                        </div>
 
-                    <button type="submit" className="Action-btn">Обновить</button>
-                </form>
+                        <button type="submit" className="Action-btn">Обновить</button>
+                    </form>
+                </div>
             </div>
         </div>
       )

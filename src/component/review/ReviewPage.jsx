@@ -1,8 +1,11 @@
 import React, {useState, useEffect} from "react"
 import { Link, useParams, useNavigate } from "react-router-dom";
+
 import ReviewSerivce from "../../service/ReviewService";
 import AuthService from "../../service/AuthService";
-import RoleService from "../../service/RoleService";
+
+import isAdminUser from "../../function/IsAdmin";
+
 
 const ReviewPage = () => {
     const {id} = useParams();
@@ -11,10 +14,13 @@ const ReviewPage = () => {
     const navigate = useNavigate();
 
     const currentUserId = localStorage.getItem("userId");
-    const isAdmin = RoleService.isAdmin();
+    const isAdmin = isAdminUser();
+
+    const reviewService = new ReviewSerivce();
+    const authService = new AuthService();
 
     useEffect(() => {
-        ReviewSerivce.getReveiw(id).then(
+        reviewService.getReveiw(id).then(
             (response) => {
                 setReview(response.data);
                 console.log(response.data);
@@ -27,7 +33,7 @@ const ReviewPage = () => {
       }, []);
 
       const deleteReview = () => {
-        ReviewSerivce.deleteReview(id).then(
+        reviewService.deleteReview(id).then(
             (response) => {
                 console.log(response);
                 navigate("/");
@@ -44,7 +50,7 @@ const ReviewPage = () => {
       }
 
       const logOut = () => {
-        AuthService.logout();
+        authService.logOut();
         navigate("/");
     };
 
