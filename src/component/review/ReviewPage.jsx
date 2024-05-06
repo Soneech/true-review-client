@@ -67,17 +67,17 @@ const ReviewPage = () => {
                                 <p>Ваш отзыв</p>
                             }
                             {currentUserId != review.author.id &&
-                                <p>Отзыв от <Link to={{ pathname: `/users/${review.author.id}` }} className="Users-link">{review.author.name}</Link></p>
+                                <p>Отзыв от <Link to={{ pathname: `/users/${review.author.id}` }} className="Default-link">{review.author.name}</Link></p>
                             }
                         </div>
                         
                         <div className="Review-category-block">
                             <p className="Bold-point">Категория:</p>
-                            <Link to={{ pathname: `/categories/${review.category.id}` }} className="Categories-link">{review.category.name}</Link>
+                            <Link to={{ pathname: `/categories/${review.category.id}/reviews` }} className="Default-link">{review.category.name}</Link>
                         </div>
 
                         <div className="Review-rating-stars-block">
-                            <p>Оценка: </p>
+                            <p className="Bold-point">Оценка: </p>
                             <div className="Rating-result">{getRatingStars(review.rating)}</div>
                         </div>
                            
@@ -102,16 +102,16 @@ const ReviewPage = () => {
                                 <p className="Review-text">{review.note}</p> 
                             </div>
                         }
-
-                        {(currentUserId == review.author.id || isAdmin) &&
-                            <div>
-                                {currentUserId == review.author.id &&
-                                    <button onClick={editReview} className="Action-btn">Редактировать</button>
-                                }
-                                <button onClick={deleteReview} className="Action-btn">Удалить</button>
-                            </div>
-                        }
                     </div>
+
+                    {(currentUserId == review.author.id || isAdmin) &&
+                        <div class="Review-action-btns-block">
+                            {currentUserId == review.author.id &&
+                                <button onClick={editReview} className="Action-btn">Редактировать</button>
+                            }
+                            <button onClick={deleteReview} className="Action-btn">Удалить</button>
+                        </div>
+                    }
                 </div>
             }
         </div>

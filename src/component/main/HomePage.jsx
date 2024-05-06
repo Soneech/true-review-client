@@ -50,7 +50,7 @@ const HomePage = () => {
                 {reviews &&
                     <div className="Reviews-main-list">
                         {reviews.map((review, index) => (
-                            <ReviewItem index={index} review={review}/>
+                            <ReviewItem index={index} review={review} withAuthor={true}/>
                         ))}
                     </div>
                 }

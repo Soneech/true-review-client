@@ -12,12 +12,19 @@ const ReviewItem = (props) => {
             
             <div className="Rating-result">{getRatingStars(props.review.rating)}</div>
             
-            {currentUserId == props.review.author.id &&
-                <p>Ваш отзыв</p>
+            <div className="Truncate-review-text"><p>{props.review.description}</p></div>
+
+            {props.withAuthor &&
+                <div>
+                    {currentUserId == props.review.author.id &&
+                    <p>Ваш отзыв</p>
+                    }
+                    {currentUserId != props.review.author.id &&
+                        <p>Отзыв от <Link to={{ pathname: `/users/${props.review.author.id}` }} className="Default-link">{props.review.author.name}</Link></p>
+                    }
+                </div>
             }
-            {currentUserId != props.review.author.id &&
-                <p>Отзыв от <Link to={{ pathname: `/users/${props.review.author.id}` }} className="Default-link">{props.review.author.name}</Link></p>
-            }
+            
         </div>
     )
 }

@@ -69,7 +69,10 @@ const ReviewsList = (props) => {
             {reviews &&
                 <div className="Reviews-list Wide-block">
                     {reviews.map((review, index) => (
-                        <ReviewItem index={index} review={review}/>
+                        <div>
+                            {props.forUser && <ReviewItem index={index} review={review} withAuthor={false}/>}
+                            {!props.forUser && <ReviewItem index={index} review={review} withAuthor={true}/>}
+                        </div>
                     ))}
                 </div>
             }
