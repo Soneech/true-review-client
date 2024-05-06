@@ -1,0 +1,26 @@
+.Categories-block {
+    width: 22vw;
+    margin-right: 2vw;
+}
+
+.Categories-list {
+    border-radius: 6px;
+    background-color: #e7e7e7ad;
+    text-align: start;
+    padding: 5px;
+}
+
+.Categories-link p {
+    margin-left: 7%;
+    margin-top: 5%;
+}
+
+.Categories-link {
+    color: #434343;
+    transition: 0.4s ease-out;
+}
+
+.Categories-link:hover {
+    color: black;
+    transition: 0.4s ease-out;
+}

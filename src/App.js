@@ -1,9 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
+import './css/App.css'
+import'./css/Auth.css'
+import './css/User.css'
+import './css/Review.css'
+import './css/Category.css'
+import './css/Rating.css'
+
 import Header from './component/main/Header';
 import HomePage from './component/main/HomePage';
 import LoginFrom from './component/auth/LoginForm';
-import AuthService from './service/AuthService';
 import RegistrationForm from './component/auth/RegistrationFrom';
 import UsersPage from './component/user/UsersPage';
 import UserProfilePage from './component/user/UserProfilePage';

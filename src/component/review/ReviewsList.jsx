@@ -36,8 +36,8 @@ const ReviewsList = () => {
     }, []);
 
     return (
-    <div>
-        <div className="Reviews-list-block">
+    <div className="Reviews-list-block">
+        <div className="Reviews-list">
             {category.name != null &&
                 <div>
                     <p>Отзывы категории: {category.name}</p>

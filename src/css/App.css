@@ -1,0 +1,130 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #212121;
+  height: 12vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Header-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 93vw;
+  align-items: center;
+  height: 100%;
+}
+
+.Logo-div {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  text-align: center;
+  width: 50vw;
+}
+
+.Logo-div a {
+  margin-right: 1.5vw;
+}
+
+.Logo-text {
+  font-size: calc(5px + 2vmin);
+  color: white;
+}
+
+a {
+  text-decoration: none;
+}
+
+.Header-link {
+  transition: 0.4s ease-out;
+  color: #c4c4c4;
+  font-size: calc(2px + 2vmin);
+}
+
+.Header-link:hover {
+  cursor: pointer;
+  transition: 0.4s ease-out;
+  color: white;
+}
+
+button {
+  transition: 0.4s ease-out;
+  font-size: calc(0.5px + 2vmin);
+  border-radius: 3px;
+  padding: 6px 18px;
+}
+
+button:hover {
+  transition: 0.4s ease-out;
+  cursor: pointer;
+}
+
+.Action-btn {
+  height: 5vh;
+  margin-top: 15px;
+  background-color: #3266e0;
+  color: #ffffff;
+  border: 1px solid #c9c9c9;
+  box-shadow: none;
+  padding: 6px 18px;
+}
+
+.Action-btn:hover {
+  background-color: #2f6eff;
+  color: white;
+}
+
+input {
+  margin: 10px 0px;
+  font-size: calc(1px + 2vmin);
+  height: 3.4vh;
+  width: 85%;
+  border-radius: 3px;
+  border: 1px solid #c9c9c9;
+}
+
+input:hover {
+  border: 1px solid #a2a2a2;
+}
+
+input:focus {
+  outline: 1px solid #a2a2a2;
+}
+
+.Form-text {
+  font-size: calc(3px + 2vmin);
+}
+
+.Suggestion-link {
+  text-decoration: underline;
+  color: #3266e0;
+  transition: 0.4s ease-out;
+}
+
+.Suggestion-link:hover {
+  color: #2f6eff;
+  transition: 0.4s ease-out;
+}
+
+ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin-left: -3vw;
+}
+
+.Home-content {
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.Reviews-list-block {
+  
+}

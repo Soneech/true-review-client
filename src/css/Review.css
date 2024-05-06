@@ -1,0 +1,17 @@
+.Reviews-block {
+    width: 65vw;
+    margin-left: 5vw;
+}
+
+.Reviews-item {
+    padding: 5px;
+    border-radius: 6px;
+    background-color: #e7e7e7ad;
+    margin-bottom: 15px;
+    text-align: start;
+}
+
+.Reviews-item p {
+    margin-left: 1.5vw;
+}
+  
