@@ -30,7 +30,8 @@ function App() {
               <Route path="/users" element={<UsersPage />}/>
               <Route path="/users/:id" element={<UserProfilePage/>}></Route>
               <Route path="/reviews/:id" element={<ReviewPage/>}></Route>
-              <Route path="/categories/:id/reviews" element={<ReviewsList/>}></Route>
+              <Route path="/categories/:id/reviews" element={<ReviewsList forUser={false}/>}></Route>
+              <Route path="/users/:id/reviews" element={<ReviewsList forUser={true}/>}></Route>
               <Route path="/reviews/new" element={<CreateReviewPage/>}></Route>
               <Route path="/categories/:id/update" element={<UpdateCategoryPage/>}></Route>
             </Routes>

@@ -13,16 +13,6 @@
     margin-top: 5%;
 }
 
-.Categories-link {
-    color: #434343;
-    transition: 0.4s ease-out;
-}
-
-.Categories-link:hover {
-    color: black;
-    transition: 0.4s ease-out;
-}
-
 .Update-category-button {
     margin-left: 1vw;
     font-size: small;

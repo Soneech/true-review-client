@@ -148,3 +148,17 @@ ul {
   width: 74vw;
   margin: auto;
 }
+
+.Bold-point {
+  font-weight: bold;
+}
+
+.Default-link {
+  color: #434343;
+  transition: 0.4s ease-out;
+}
+
+.Default-link:hover {
+  color: black;
+  transition: 0.4s ease-out;
+}

@@ -64,7 +64,7 @@ const HomePage = () => {
                     <div className="Categories-list Styled-block">
                         {categories.map((category, index) => (
                             <div key={index} className="Categories-item">
-                                <Link to={{ pathname: `/categories/${category.id}/reviews` }} className="Categories-link"><p>{category.name}</p></Link>
+                                <Link to={{ pathname: `/categories/${category.id}/reviews` }} className="Default-link Categories-link"><p>{category.name}</p></Link>
                             </div>
                         ))}
                     </div>

@@ -34,14 +34,14 @@ const UserProfilePage = () => {
 
     return (
         <div className="Content-block">
-            <p className="Page-header">Ваш профиль</p>
+            <p className="Page-header">Профиль</p>
 
             {user.name != null &&
                 <div className="User-info-div Styled-block">
                     <p>Имя: {user.name}</p>
                     {user.email && <p>Почта: {user.email}</p>}
                     
-                    <Link className="Users-link"><p>Написано отзывов: {user.reviews_count}</p></Link>
+                    <Link to={{ pathname: `/users/${user.id}/reviews` }}className="Default-link"><p>Написано отзывов: {user.reviews_count}</p></Link>
 
                     <p>Привелегии:</p>
                     <ul className="Roles-list">

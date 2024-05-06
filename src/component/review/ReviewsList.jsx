@@ -9,8 +9,8 @@ import CategoryService from "../../service/CategoryService";
 import isAdminUser from "../../function/IsAdmin";
 
 
-const ReviewsList = () => {
-    const {id} = useParams();
+const ReviewsList = (props) => {
+    const {id} = useParams(); // user id or category id
     const [category, setCategory] = useState([]);
     const [reviews, setReviews] = useState([]);
 
@@ -20,26 +20,38 @@ const ReviewsList = () => {
     const categoryService = new CategoryService();
 
     useEffect(() => {
-        reviewService.getReviewsForCategory(id).then(
-            (response) => {
-                setReviews(response.data);
-                console.log(response.data);
-            },
-            (error) => {
-                console.log(error);
-            }
-        );
-      }, []);
+        if (props.forUser) {
+            reviewService.getUserReviews(id).then(
+                (response) => {
+                    setReviews(response.data);
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
+        } else {
+            reviewService.getReviewsForCategory(id).then(
+                (response) => {
+                    setReviews(response.data);
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
+        }
+    }, []);
 
     useEffect(() => {
-        categoryService.getCategory(id).then(
-            (response) => {
-                setCategory(response.data);
-            },
-            (error) => {
-                console.log(error);
-            }
-        );
+        if (!props.forUser) {
+            categoryService.getCategory(id).then(
+                (response) => {
+                    setCategory(response.data);
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
+        }
     }, []);
 
     return (

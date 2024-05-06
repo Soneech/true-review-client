@@ -28,4 +28,40 @@
     padding-top: 20px;
     padding-bottom: 30px;
 }
+
+.Review-block {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 65vw;
+    margin: auto;
+}
+
+.Review-block > * {
+    margin-left: 30px;
+    line-height: 1.5vh;
+}
+
+.Review-category-block {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.Review-text-block {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.Review-text {
+    border: 1px solid #bababa;
+    padding: 7px;
+    border-radius: 6px;
+}
+
+.Review-rating-stars-block {
+    display: flex;
+    align-items: center;
+}
   

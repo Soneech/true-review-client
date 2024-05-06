@@ -21,7 +21,7 @@ class ReviewService {
     }
     
     getUserReviews(userId) {
-        return axios.get(this.#serviceBaseUrl + "/user/" + userId + "/reviews", {headers: authHeader()});
+        return axios.get(this.#serviceBaseUrl + "/users/" + userId + "/reviews", {headers: authHeader()});
     }
     
     getReviewsForCategory(categoryId) {
