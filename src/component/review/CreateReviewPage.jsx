@@ -7,14 +7,20 @@ import AuthService from "../../service/AuthService";
 
 
 const CreateReviewPage = () => {
-    const [objectName, setObjectName] = useState("");
+    const [itemName, setItemName] = useState(null);
+    var [searchItemName, setSearchItemName] = useState(null);
+    var [itemId, setItemId] = useState(null);
+
     const [rating, setRating] = useState("");
     const [advantages, setAdvantages] = useState("");
     const [disadvantages, setDisadvantages] = useState("");
     const [note, setNote] = useState("");
     const [categoryId, setCategoryId] = useState("");
 
+    var [isChecked, setIsChecked] = useState(false);
+
     const [categories, setCategories] = useState([]);
+    var [items, setItems] = useState([]);
 
     const reviewService = new ReviewSerivce();
     const categoryService = new CategoryService();
@@ -44,10 +50,19 @@ const CreateReviewPage = () => {
         );
       }, []);
 
-      const handleCreateReview = async (event) => {
+    const handleCreateReview = async (event) => {
         event.preventDefault();
+
+        if (itemName != null) {
+            createReviewAndNewItem();
+        } else if (itemId != null) {
+            createReview();
+        }
+    };
+
+    const createReviewAndNewItem = async () => {
         let review = {
-            object_name: objectName,
+            item_name: itemName,
             rating: rating, 
             advantages: advantages,
             disadvantages: disadvantages,
@@ -55,12 +70,9 @@ const CreateReviewPage = () => {
             category_id: categoryId
         };
 
-        console.log(review);
-
         try {
-          await reviewService.createReview(review).then(
+            await reviewService.createReviewAndItem(review).then(
             (response) => {
-                console.log(response);
                 navigate("/");
                 window.location.reload();
             },
@@ -71,26 +83,120 @@ const CreateReviewPage = () => {
                 }
                 console.log(error);
             }
-          );
+            );
         } catch (err) {
             console.log(err);
         }
-      };
+    };
+
+    const createReview = async () => {
+        let review = {
+            item_id: itemId,
+            rating: rating, 
+            advantages: advantages,
+            disadvantages: disadvantages,
+            note: note,
+            category_id: categoryId
+        };
+
+        try {
+            await reviewService.createReview(review).then(
+            (response) => {
+                navigate("/");
+                window.location.reload();
+            },
+            (error) => {
+                if (error.response.status == 401 || error.response.status == 405 || error.response.status == 403 ) {
+                    navigate("/");
+                    authService.logOut();
+                }
+                console.log(error);
+            }
+            );
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    const handleCheckboxChange = (event) => {
+        setIsChecked(event.target.checked);
+
+        if (isChecked) {
+            setItemId(null);
+        } else {
+            setItemName(null);
+        }
+    };
+
+    const searchReviewItems = async (event) => {
+        event.preventDefault();
+
+        try {
+            await reviewService.searchReviewItems(searchItemName).then(
+            (response) => {
+                setItems(response.data);
+                setItemId(response.data[0].id);
+            },
+            (error) => {
+                if (error.response.status == 401 || error.response.status == 405 || error.response.status == 403 ) {
+                    navigate("/");
+                    authService.logOut();
+                }
+                console.log(error);
+            }
+            );
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
       return (
         <div className="Content-block">
             <p className="Page-header">Создание отзыва</p>
+
             <div className="Styled-block Wide-block Create-review-block">
+                {!isChecked &&
+                    <div>
+                        <div className="Search-review-item-block">
+                            <input name="search" placeholder="Предмет отзыва" value={searchItemName} onChange={(event) => setSearchItemName(event.target.value)}/>
+                            <button className="Action-btn" onClick={searchReviewItems}>Найти</button>
+                        </div>
+
+                        {items.length != 0 &&
+                            <div>
+                                <p>Нашли по вашему запросу:</p>
+                                <select onChange={(event) => setItemId(event.target.value)}>
+                                    { items.map((item, index) => 
+                                        <option key={index} value={item.id} >{item.name}</option>) 
+                                    }
+                                </select>
+                            </div>
+                        }
+                    </div>
+                    
+                }
+                
+                <div className="Add-item-radio-block">
+                    <p>Не нашли нужное?</p>
+
+                    <div>
+                        <label for="add-item-radio">Добавить в каталог</label>
+                        <input type="checkbox" id="add-item-radio" className="Add-item-radio" onChange={handleCheckboxChange}/>
+                    </div>
+                </div>
+
                 <form onSubmit={handleCreateReview}>
+                    {isChecked &&
+                        <div>
+                            <input name="object_name" placeholder="Предмет отзыва" value={itemName} onChange={(event) => setItemName(event.target.value)}/>
+                        </div>
+                    }
+
                     <select onChange={(event) => setCategoryId(event.target.value)}>
                         { categories.map((category, index) => 
                             <option key={index} value={category.id} >{category.name}</option>) 
                         }
                     </select>
-
-                    <div>
-                        <input name="object_name" placeholder="Предмет отзыва" value={objectName} onChange={(event) => setObjectName(event.target.value)}/>
-                    </div>
 
                     <div className="Rating-block">
                         <div className="Rating-area">

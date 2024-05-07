@@ -8,7 +8,7 @@ const ReviewItem = (props) => {
 
     return (
         <div key={props.index} className="Reviews-item Styled-block">
-            <Link to={{ pathname: `/reviews/${props.review.id}` }} className="Default-link"><p>{props.review.object_name}</p></Link>
+            <Link to={{ pathname: `/reviews/${props.review.id}` }} className="Default-link"><p>{props.review.review_item.name}</p></Link>
             
             <div className="Rating-result">{getRatingStars(props.review.rating)}</div>
             

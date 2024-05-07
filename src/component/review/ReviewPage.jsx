@@ -57,9 +57,9 @@ const ReviewPage = () => {
 
       return(
         <div className="Content-block">
-            {review.object_name != null &&
+            {review.review_item != null &&
                 <div>
-                    <p className="Page-header">Отзыв на '{review.object_name}'</p>
+                    <p className="Page-header">Отзыв на '{review.review_item.name}'</p>
 
                     <div className="Styled-block Review-block">
                         <div>
@@ -105,7 +105,7 @@ const ReviewPage = () => {
                     </div>
 
                     {(currentUserId == review.author.id || isAdmin) &&
-                        <div class="Review-action-btns-block">
+                        <div className="Review-action-btns-block">
                             {currentUserId == review.author.id &&
                                 <button onClick={editReview} className="Action-btn">Редактировать</button>
                             }

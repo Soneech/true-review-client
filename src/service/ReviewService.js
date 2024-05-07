@@ -35,6 +35,19 @@ class ReviewService {
     createReview(review) {
         return axios.post(this.#serviceBaseUrl + "/reviews", review, {headers: authHeader()});
     }
+
+    createReviewAndItem(review) {
+        return axios.post(this.#serviceBaseUrl + "/reviews-items", review, {headers: authHeader()});
+    }
+
+    searchReviewItems(itemName) {
+        return axios.get(this.#serviceBaseUrl + "/items/search", {
+            headers: authHeader(),
+            params: {
+                name: itemName
+            }
+        });
+    }
 }
 
 

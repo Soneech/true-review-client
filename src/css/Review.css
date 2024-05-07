@@ -83,4 +83,24 @@
     gap: 12px;
     justify-content: center;
 }
+
+.Search-review-item-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;   
+}
+
+.Search-review-item-block button {
+    margin: 0px;
+    height: 4vh;
+}
+
+.Search-review-item-block input {
+    width: 57vw;
+}
+
+.Add-item-radio-block div .Add-item-radio:checked ~ .Search-review-item-block {
+    display: none;
+}
   
