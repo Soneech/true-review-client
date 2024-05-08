@@ -27,6 +27,7 @@ const Header = () => {
                     <Link to="/"><p className="Logo-text">TrueReview</p></Link>
                     <Link to="/"><p className="Home-link Header-link">Лента</p></Link>
                     <Link to="/categories"><p className="Header-link">Категории</p></Link>
+                    <Link to="/items" className="Header-link">Предметы отзывов</Link>
                 </div>
                 
                 <div className="Auth-div">

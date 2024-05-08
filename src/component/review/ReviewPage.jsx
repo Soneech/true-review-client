@@ -59,7 +59,7 @@ const ReviewPage = () => {
         <div className="Content-block">
             {review.review_item != null &&
                 <div>
-                    <p className="Page-header">Отзыв на '{review.review_item.name}'</p>
+                    <p className="Page-header">Отзыв на {review.review_item.name}</p>
 
                     <div className="Styled-block Review-block">
                         <div>

@@ -27,6 +27,8 @@
 .Create-review-block {
     padding-top: 20px;
     padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
 }
 
 .Review-block {
@@ -100,7 +102,49 @@
     width: 57vw;
 }
 
-.Add-item-radio-block div .Add-item-radio:checked ~ .Search-review-item-block {
-    display: none;
+.Add-item-radio-block {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.Add-item-radio {
+    width: 3vw;
+    font-size: small;
+    outline: none;
+}
+
+.Add-item-radio:active, .Add-item-radio:focus, .Add-item-radio:hover {
+    outline: none;
+}
+
+.Create-review-form textarea {
+    height: 9vh;
+}
+
+.Create-review-form select {
+    height: 3.5vh;
+}
+
+.Rating-block {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.Select-category-block {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+}
+
+.Found-items-block {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
 }
   

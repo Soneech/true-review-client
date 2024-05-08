@@ -163,7 +163,7 @@ const CreateReviewPage = () => {
                         </div>
 
                         {items.length != 0 &&
-                            <div>
+                            <div className="Found-items-block">
                                 <p>Нашли по вашему запросу:</p>
                                 <select onChange={(event) => setItemId(event.target.value)}>
                                     { items.map((item, index) => 
@@ -175,30 +175,32 @@ const CreateReviewPage = () => {
                     </div>
                     
                 }
-                
-                <div className="Add-item-radio-block">
-                    <p>Не нашли нужное?</p>
 
-                    <div>
-                        <label for="add-item-radio">Добавить в каталог</label>
-                        <input type="checkbox" id="add-item-radio" className="Add-item-radio" onChange={handleCheckboxChange}/>
-                    </div>
-                </div>
-
-                <form onSubmit={handleCreateReview}>
+                <form onSubmit={handleCreateReview} className="Create-review-form">
                     {isChecked &&
                         <div>
                             <input name="object_name" placeholder="Предмет отзыва" value={itemName} onChange={(event) => setItemName(event.target.value)}/>
                         </div>
                     }
 
-                    <select onChange={(event) => setCategoryId(event.target.value)}>
-                        { categories.map((category, index) => 
-                            <option key={index} value={category.id} >{category.name}</option>) 
-                        }
-                    </select>
-
+                    <p>Не нашли нужное?</p>
+                    <div className="Add-item-radio-block">
+                        <p>Добавить в каталог: </p>
+                        <input type="checkbox" id="add-item-radio" className="Add-item-radio" onChange={handleCheckboxChange}/>
+                    </div>
+                    
+                    <div className="Select-category-block">
+                        <p>Выберите категорию:</p>
+                        <select onChange={(event) => setCategoryId(event.target.value)}>
+                            { categories.map((category, index) => 
+                                <option key={index} value={category.id} >{category.name}</option>) 
+                            }
+                        </select>
+                    </div>
+                    
+                    
                     <div className="Rating-block">
+                        <p>Поставьте оценку:</p>
                         <div className="Rating-area">
                             <input type="radio" id="star-5" name="rating" value="5" onChange={(event) => setRating(event.target.value)}/>
                             <label for="star-5" title="Оценка «5»"></label>

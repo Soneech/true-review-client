@@ -1,30 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 import getRatingStars from "../../function/GetRatingStars";
 
-
 const ReviewItem = (props) => {
-    const currentUserId = localStorage.getItem("userId");
 
     return (
         <div key={props.index} className="Reviews-item Styled-block">
-            <Link to={{ pathname: `/reviews/${props.review.id}` }} className="Default-link"><p>{props.review.review_item.name}</p></Link>
+            <Link to={{ pathname: `/items/${props.item.id}/reviews` }} className="Default-link"><p>{props.item.name}</p></Link>
             
-            <div className="Rating-result">{getRatingStars(props.review.rating)}</div>
-            
-            <div className="Truncate-review-text"><p>{props.review.description}</p></div>
-
-            {props.withAuthor &&
-                <div>
-                    {currentUserId == props.review.author.id &&
-                    <p>Ваш отзыв</p>
-                    }
-                    {currentUserId != props.review.author.id &&
-                        <p>Отзыв от <Link to={{ pathname: `/users/${props.review.author.id}` }} className="Default-link">{props.review.author.name}</Link></p>
-                    }
-                </div>
-            }
-            
+        
+            <div className="Rating-result">{getRatingStars(Math.round(props.item.middle_rating))}</div>
+            <p>Кол-во отзывов: {props.item.reviews_count}</p>            
         </div>
     )
 }

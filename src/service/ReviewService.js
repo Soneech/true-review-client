@@ -24,10 +24,6 @@ class ReviewService {
         return axios.get(this.#serviceBaseUrl + "/users/" + userId + "/reviews", {headers: authHeader()});
     }
     
-    getReviewsForCategory(categoryId) {
-        return axios.get(this.#serviceBaseUrl + "/categories/" + categoryId + "/reviews", {headers: authHeader()});
-    }
-    
     deleteReview(reviewId) {
         return axios.delete(this.#serviceBaseUrl + "/reviews/" + reviewId, {headers: authHeader()});
     }
@@ -47,6 +43,22 @@ class ReviewService {
                 name: itemName
             }
         });
+    }
+
+    getItem(itemId) {
+        return axios.get(this.#serviceBaseUrl + "/items/" + itemId, {headers: authHeader()});
+    }
+
+    getItems() {
+        return axios.get(this.#serviceBaseUrl + "/items", {headers: authHeader()});
+    }
+
+    getReviewsForItem(itemId) {
+        return axios.get(this.#serviceBaseUrl + "/items/" + itemId + "/reviews", {headers: authHeader()});
+    }
+
+    getItemsForCategory(categoryId) {
+        return axios.get(this.#serviceBaseUrl + "/categories/" + categoryId + "/items");
     }
 }
 

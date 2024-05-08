@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import ReviewItem from "../review/ReviewItem";
+import ReviewBlock from "../review/ReviewBlock";
 
 import CategoryService from "../../service/CategoryService";
 import ReviewSerivce from "../../service/ReviewService";
@@ -50,7 +50,7 @@ const HomePage = () => {
                 {reviews &&
                     <div className="Reviews-main-list">
                         {reviews.map((review, index) => (
-                            <ReviewItem index={index} review={review} withAuthor={true}/>
+                            <ReviewBlock index={index} review={review} withAuthor={true}/>
                         ))}
                     </div>
                 }
@@ -64,7 +64,7 @@ const HomePage = () => {
                     <div className="Categories-list Styled-block">
                         {categories.map((category, index) => (
                             <div key={index} className="Categories-item">
-                                <Link to={{ pathname: `/categories/${category.id}/reviews` }} className="Default-link Categories-link"><p>{category.name}</p></Link>
+                                <Link to={{ pathname: `/categories/${category.id}/items` }} className="Default-link Categories-link"><p>{category.name}</p></Link>
                             </div>
                         ))}
                     </div>

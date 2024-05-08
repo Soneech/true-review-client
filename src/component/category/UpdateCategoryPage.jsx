@@ -50,7 +50,7 @@ const UpdateCategoryPage = () => {
             await categoryService.updateCategory(id, name).then(
                 (response) => {
                     console.log(response);
-                    navigate("/categories/" + id + "/reviews");
+                    navigate("/categories/" + id + "/items");
                 },
                 (error) => {
                     console.log(error);
