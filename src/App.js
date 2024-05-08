@@ -1,9 +1,9 @@
-import './css/App.css'
-import'./css/Auth.css'
-import './css/User.css'
-import './css/Review.css'
-import './css/Category.css'
-import './css/Rating.css'
+import './css/App.css';
+import'./css/Auth.css';
+import './css/User.css';
+import './css/Review.css';
+import './css/Category.css';
+import './css/Rating.css';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
@@ -18,7 +18,8 @@ import ReviewsList from './component/review/ReviewsList';
 import CreateReviewPage from './component/review/CreateReviewPage';
 import UpdateCategoryPage from './component/category/UpdateCategoryPage';
 import CategoriesList from './component/category/CategoriesList';
-import ItemsList from './component/review/ItemsList'
+import ItemsList from './component/review/ItemsList';
+import ForbiddenPage from './component/auth/ForbiddenPage';
 
 
 function App() {
@@ -40,6 +41,8 @@ function App() {
               <Route path="/categories/:id/update" element={<UpdateCategoryPage/>}></Route>
               <Route path="/categories" element={<CategoriesList/>}></Route>
               <Route path="/items" element={<ItemsList/>}></Route>
+              <Route path="/access/error" element={<ForbiddenPage needAuth={true}/>}></Route>
+              <Route path="/operations/error" element={<ForbiddenPage/>}></Route>
               
             </Routes>
         </BrowserRouter>

@@ -27,24 +27,23 @@ const CreateReviewPage = () => {
     const authService = new AuthService();
 
     const isAuth = authService.checkAuthentication();
+    const errorPath = "/access/error";
 
     const navigate = useNavigate();
 
     useEffect(() => {
         if (!isAuth) {
-            navigate("/");
+            navigate(errorPath);
         }
 
         categoryService.getAllCategories().then(
             (response) => {
                 setCategories(response.data);
                 setCategoryId(response.data[0].id);
-               
-                console.log(response.data);
             },
             (error) => {
                 authService.logOut();
-                navigate("/");
+                navigate(errorPath);
                 console.log(error);
             }
         );
@@ -78,8 +77,8 @@ const CreateReviewPage = () => {
             },
             (error) => {
                 if (error.response.status == 401 || error.response.status == 405 || error.response.status == 403 ) {
-                    navigate("/");
                     authService.logOut();
+                    navigate(errorPath);
                 }
                 console.log(error);
             }

@@ -8,6 +8,8 @@ const UsersPage = () => {
     const navigate = useNavigate();
     const userService = new UserService();
 
+    const errorsPath = "/operations/error";
+
     useEffect(() => {
         userService.getAllUsers().then(
             (response) => {
@@ -15,7 +17,7 @@ const UsersPage = () => {
                 console.log(response.data);
             },
             (error) => {
-                navigate("/");
+                navigate(errorsPath);
                 console.log(error);
             }
         );

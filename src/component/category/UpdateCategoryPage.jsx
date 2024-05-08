@@ -18,10 +18,12 @@ const UpdateCategoryPage = () => {
 
     const categoryService = new CategoryService();
     const authService = new AuthService();
+
+    const errorPath = "/operations/error";
     
     useEffect(() => {
         if (!isAdmin) {
-            navigate("/");
+            navigate(errorPath);
         } else {
             categoryService.getCategory(id).then(
                 (response) => {
@@ -41,7 +43,7 @@ const UpdateCategoryPage = () => {
     
     const logOut = () => {
         authService.logOut();
-        navigate("/");
+        navigate(errorPath);
     };
 
     const handleUpdate = async (event) => {

@@ -11,6 +11,8 @@ const UserProfilePage = () => {
     const userSerivce = new UserService();
     const authService = new AuthService();
 
+    const errorPath = "/access/error";
+
     useEffect(() => {
         userSerivce.getUser(id).then(
             (response) => {
@@ -20,16 +22,21 @@ const UserProfilePage = () => {
             (error) => {
                 if (error.response.status == 401 || error.response.status == 405) {
                     authService.logOut();
+                } else if (error.response.status == 404) {
+                    navigate("/");
+                } else {
+                    navigate(errorPath);
                 }
-                navigate("/");
+                
                 console.log(error);
             }
         );
       }, []);
     
     const logOut = () => {
-        authService.logOut();
         navigate("/");
+        authService.logOut();
+        
     };
 
     return (
