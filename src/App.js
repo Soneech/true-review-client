@@ -27,25 +27,30 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-            <Header /> 
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/auth/login" element={<LoginFrom />} />
-              <Route path="/auth/registration" element={<RegistrationForm />} />
-              <Route path="/users" element={<UsersPage />}/>
-              <Route path="/users/:id" element={<UserProfilePage/>}></Route>
-              <Route path="/reviews/:id" element={<ReviewPage/>}></Route>
-              <Route path="/categories/:id/items" element={<ItemsList forCategory={true}/>}></Route>
-              <Route path="/users/:id/reviews" element={<ReviewsList forUser={true}/>}></Route>
-              <Route path="/items/:id/reviews" element={<ReviewsList forItem={true}/>}></Route>
-              <Route path="/reviews/new" element={<CreateReviewPage/>}></Route>
-              <Route path="/categories/:id/update" element={<UpdateCategoryPage/>}></Route>
-              <Route path="/categories" element={<CategoriesList/>}></Route>
-              <Route path="/items" element={<ItemsList/>}></Route>
-              <Route path="/access/error" element={<ForbiddenPage needAuth={true}/>}></Route>
-              <Route path="/operations/error" element={<ForbiddenPage/>}></Route>
-            </Routes>
-
+            <div className="Header-container">
+              <Header />
+            </div>
+            
+            <div className="Wrapper">
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/auth/login" element={<LoginFrom />} />
+                <Route path="/auth/registration" element={<RegistrationForm />} />
+                <Route path="/users" element={<UsersPage />}/>
+                <Route path="/users/:id" element={<UserProfilePage/>}></Route>
+                <Route path="/reviews/:id" element={<ReviewPage/>}></Route>
+                <Route path="/categories/:id/items" element={<ItemsList forCategory={true}/>}></Route>
+                <Route path="/users/:id/reviews" element={<ReviewsList forUser={true}/>}></Route>
+                <Route path="/items/:id/reviews" element={<ReviewsList forItem={true}/>}></Route>
+                <Route path="/reviews/new" element={<CreateReviewPage/>}></Route>
+                <Route path="/categories/:id/update" element={<UpdateCategoryPage/>}></Route>
+                <Route path="/categories" element={<CategoriesList/>}></Route>
+                <Route path="/items" element={<ItemsList/>}></Route>
+                <Route path="/access/error" element={<ForbiddenPage needAuth={true}/>}></Route>
+                <Route path="/operations/error" element={<ForbiddenPage/>}></Route>
+              </Routes>
+            </div> 
+            
             <Footer/>
         </BrowserRouter>
     </div>

@@ -21,7 +21,7 @@ const UserProfilePage = () => {
             },
             (error) => {
                 if (error.response.status == 401 || error.response.status == 405) {
-                    authService.logOut();
+                    logOut();
                 } else if (error.response.status == 404) {
                     navigate("/");
                 } else {
@@ -34,9 +34,8 @@ const UserProfilePage = () => {
       }, []);
     
     const logOut = () => {
-        navigate("/");
         authService.logOut();
-        
+        navigate(errorPath);
     };
 
     return (

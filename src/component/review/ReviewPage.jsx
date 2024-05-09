@@ -106,9 +106,6 @@ const ReviewPage = () => {
 
                     {(currentUserId == review.author.id || isAdmin) &&
                         <div className="Review-action-btns-block">
-                            {currentUserId == review.author.id &&
-                                <button onClick={editReview} className="Action-btn">Редактировать</button>
-                            }
                             <button onClick={deleteReview} className="Action-btn">Удалить</button>
                         </div>
                     }

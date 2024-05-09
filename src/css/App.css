@@ -2,6 +2,15 @@
   text-align: center;
 }
 
+html, body {
+  height: 100%;
+}
+
+.Wrapper {
+  position: relative;
+  min-height: 80vh;
+}
+
 .App-header {
   background-color: #212121;
   height: 12vh;
@@ -34,6 +43,38 @@
 .Logo-text {
   font-size: calc(5px + 2vmin);
   color: white;
+}
+
+.Footer {
+  background-color: #212121;
+  height: 12vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Footer-container {
+  width: 83vw;
+  display: flex;
+  justify-content: space-between;
+}
+
+.Footer-link {
+  color: #c4c4c4;
+  transition: 0.4s ease-out;
+}
+
+.Footer-link:hover {
+  color: white;
+  transition: 0.4s ease-out;
+}
+
+.Info-block {
+  color: white;
+}
+
+.Info-block, .Contacts-block {
+  text-align: start;
 }
 
 a {
