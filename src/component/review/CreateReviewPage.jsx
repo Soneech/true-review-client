@@ -68,11 +68,11 @@ const CreateReviewPage = () => {
     const createReviewAndNewItem = async () => {
         let review = {
             item_name: itemName,
+            category_id: categoryId,
             rating: rating, 
             advantages: advantages,
             disadvantages: disadvantages,
-            note: note,
-            category_id: categoryId
+            note: note
         };
 
         try {
@@ -104,7 +104,6 @@ const CreateReviewPage = () => {
             advantages: advantages,
             disadvantages: disadvantages,
             note: note,
-            category_id: categoryId
         };
         
         try {
@@ -210,14 +209,17 @@ const CreateReviewPage = () => {
                         <input type="checkbox" id="add-item-radio" className="Add-item-radio" onChange={handleCheckboxChange}/>
                     </div>
                     
-                    <div className="Select-category-block">
-                        <p>Выберите категорию:</p>
-                        <select onChange={(event) => setCategoryId(event.target.value)}>
-                            { categories.map((category, index) => 
-                                <option key={index} value={category.id} >{category.name}</option>) 
-                            }
-                        </select>
-                    </div>
+                    {isChecked &&
+                        <div className="Select-category-block">
+                            <p>Выберите категорию:</p>
+                            <select onChange={(event) => setCategoryId(event.target.value)}>
+                                { categories.map((category, index) => 
+                                    <option key={index} value={category.id} >{category.name}</option>) 
+                                }
+                            </select>
+                        </div>
+                    }
+                    
                     
                     {fieldsErrors.rating && <p className="Error-message Rating-error-message">{fieldsErrors.rating[0]}</p>}
                     <div className="Rating-block">

@@ -11,6 +11,7 @@ const ReviewItem = (props) => {
             
         
             <div className="Rating-result">{getRatingStars(Math.round(props.item.middle_rating))}</div>
+            <p>Категория: <Link to={{ pathname: `/categories/${props.item.category.id}/items` }} className="Default-link">{props.item.category.name}</Link></p>
             <p>Кол-во отзывов: {props.item.reviews_count}</p>            
         </div>
     )

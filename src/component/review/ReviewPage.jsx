@@ -46,10 +46,6 @@ const ReviewPage = () => {
         )
       }
 
-      const editReview = () => {
-
-      }
-
       const logOut = () => {
         authService.logOut();
         navigate("/");
@@ -73,7 +69,7 @@ const ReviewPage = () => {
                         
                         <div className="Review-category-block">
                             <p className="Bold-point">Категория:</p>
-                            <Link to={{ pathname: `/categories/${review.category.id}/reviews` }} className="Default-link">{review.category.name}</Link>
+                            <Link to={{ pathname: `/categories/${review.review_item.category.id}/items` }} className="Default-link">{review.review_item.category.name}</Link>
                         </div>
 
                         <div className="Review-rating-stars-block">
