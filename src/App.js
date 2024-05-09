@@ -8,6 +8,7 @@ import './css/Rating.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Header from './component/main/Header';
+import Footer from './component/main/Footer';
 import HomePage from './component/main/HomePage';
 import LoginFrom from './component/auth/LoginForm';
 import RegistrationForm from './component/auth/RegistrationFrom';
@@ -43,8 +44,9 @@ function App() {
               <Route path="/items" element={<ItemsList/>}></Route>
               <Route path="/access/error" element={<ForbiddenPage needAuth={true}/>}></Route>
               <Route path="/operations/error" element={<ForbiddenPage/>}></Route>
-              
             </Routes>
+
+            <Footer/>
         </BrowserRouter>
     </div>
   );

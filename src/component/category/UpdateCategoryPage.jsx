@@ -9,9 +9,14 @@ import isAdminUser from "../../function/IsAdmin";
 
 
 const UpdateCategoryPage = () => {
+    let {id} = useParams();
+
     const [name, setName] = useState("");
     const [category, setCategory] = useState("");
-    let {id} = useParams();
+
+    const [fieldsErrors, setErrors] = useState([]);
+    const [errorMessage, setMessage] = useState("");
+
 
     const navigate = useNavigate();
     const isAdmin = isAdminUser();
@@ -29,7 +34,6 @@ const UpdateCategoryPage = () => {
                 (response) => {
                     setCategory(response.data);
                     setName(response.data.name);
-                    console.log(response.data);
                 },
                 (error) => {
                     if (error.response.status == 401 || error.response.status == 405) {
@@ -51,10 +55,13 @@ const UpdateCategoryPage = () => {
         try {
             await categoryService.updateCategory(id, name).then(
                 (response) => {
-                    console.log(response);
                     navigate("/categories/" + id + "/items");
                 },
                 (error) => {
+                    if (error.response.status == 400) {
+                        setErrors(error.response.data.fields_errors);
+                        setMessage(error.response.data.message);
+                    }
                     console.log(error);
                 }
             );
@@ -71,9 +78,11 @@ const UpdateCategoryPage = () => {
                 <div className="Styled-block Wide-block Update-category-block">
                     <form onSubmit={handleUpdate}>
                         <div>
+                            {fieldsErrors.name && <p className="Error-message Form-input-error-message Category-update-error-message">{fieldsErrors.name[0]}</p>}
                             <input name="name" placeholder="Название" value={name} onChange={(event) => setName(event.target.value)}/>
                         </div>
 
+                        {errorMessage && <p className="Error-message Form-main-error-message">{errorMessage}</p>}
                         <button type="submit" className="Action-btn">Обновить</button>
                     </form>
                 </div>

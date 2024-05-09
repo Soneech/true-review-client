@@ -163,3 +163,28 @@ ul {
   color: black;
   transition: 0.4s ease-out;
 }
+
+.Error-message {
+  font-size: small;
+  color: #fa0000cf;
+}
+
+.Form-input-error-message {
+  margin-left: 1.7vw;
+  line-height: 1.5vh;
+  margin-bottom: -8px;
+  text-align: start;
+}
+
+.Form-main-error-message {
+  text-align: center;
+  line-height: 1vh;
+  margin-top: -1px;
+  margin-bottom: -1px;
+}
+
+.Search-error-message {
+  position: absolute;
+  top: 165px;
+  left: 16.3vw;
+}

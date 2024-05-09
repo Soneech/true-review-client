@@ -6,6 +6,8 @@ import AuthService from "../../service/AuthService";
 const LoginFrom = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [fieldsErrors, setErrors] = useState([]);
+    const [errorMessage, setMessage] = useState("");
 
     const navigate = useNavigate();
 
@@ -21,6 +23,10 @@ const LoginFrom = () => {
                     window.location.reload();
                 },
                 (error) => {
+                    if (error.response.status == 400) {
+                        setErrors(error.response.data.fields_errors);
+                        setMessage(error.response.data.message);
+                    }
                     console.log(error);
                 }
             );
@@ -36,13 +42,17 @@ const LoginFrom = () => {
 
                 <form onSubmit={handleLogin}>
                     <div>
+                        {fieldsErrors.email && <p className="Error-message Form-input-error-message">{fieldsErrors.email[0]}</p>}
                         <input name="email" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)}/>
+                        
                     </div>
 
                     <div>
+                        {fieldsErrors.password && <p className="Error-message Form-input-error-message">{fieldsErrors.password[0]}</p>}
                         <input name="password" type="password" placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)}/>
                     </div>
 
+                    {errorMessage && <p className="Error-message Form-main-error-message">{errorMessage}</p>}
                     <button type="submit" className="Action-btn">Войти</button>
                 </form>
             </div>

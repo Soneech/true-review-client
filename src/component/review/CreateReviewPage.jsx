@@ -8,6 +8,7 @@ import AuthService from "../../service/AuthService";
 
 const CreateReviewPage = () => {
     const [itemName, setItemName] = useState(null);
+
     var [searchItemName, setSearchItemName] = useState(null);
     var [itemId, setItemId] = useState(null);
 
@@ -21,6 +22,11 @@ const CreateReviewPage = () => {
 
     const [categories, setCategories] = useState([]);
     var [items, setItems] = useState([]);
+
+    const [searchErrorMessage, setSearchErrorMessage] = useState("");
+
+    const [fieldsErrors, setErrors] = useState([]);
+    const [errorMessage, setMessage] = useState("");
 
     const reviewService = new ReviewSerivce();
     const categoryService = new CategoryService();
@@ -52,9 +58,9 @@ const CreateReviewPage = () => {
     const handleCreateReview = async (event) => {
         event.preventDefault();
 
-        if (itemName != null) {
+        if (isChecked) {
             createReviewAndNewItem();
-        } else if (itemId != null) {
+        } else {
             createReview();
         }
     };
@@ -79,6 +85,9 @@ const CreateReviewPage = () => {
                 if (error.response.status == 401 || error.response.status == 405 || error.response.status == 403 ) {
                     authService.logOut();
                     navigate(errorPath);
+                } else if (error.response.status == 400) {
+                    setErrors(error.response.data.fields_errors);
+                    setMessage(error.response.data.message);
                 }
                 console.log(error);
             }
@@ -97,20 +106,23 @@ const CreateReviewPage = () => {
             note: note,
             category_id: categoryId
         };
-
+        
         try {
             await reviewService.createReview(review).then(
-            (response) => {
-                navigate("/");
-                window.location.reload();
-            },
-            (error) => {
-                if (error.response.status == 401 || error.response.status == 405 || error.response.status == 403 ) {
+                (response) => {
                     navigate("/");
-                    authService.logOut();
+                    window.location.reload();
+                },
+                (error) => {
+                    if (error.response.status == 401 || error.response.status == 405 || error.response.status == 403 ) {
+                        navigate("/");
+                        authService.logOut();
+                    } else if (error.response.status == 400) {
+                        setErrors(error.response.data.fields_errors);
+                        setMessage(error.response.data.message);
+                    }
+                    console.log(error);
                 }
-                console.log(error);
-            }
             );
         } catch (err) {
             console.log(err);
@@ -122,6 +134,8 @@ const CreateReviewPage = () => {
 
         if (isChecked) {
             setItemId(null);
+            setSearchErrorMessage(null);
+            setErrors([]);
         } else {
             setItemName(null);
         }
@@ -140,7 +154,9 @@ const CreateReviewPage = () => {
                 if (error.response.status == 401 || error.response.status == 405 || error.response.status == 403 ) {
                     navigate("/");
                     authService.logOut();
-                }
+                } else if (error.response.status == 400) {
+                    setSearchErrorMessage("Заполните это поле");
+                } 
                 console.log(error);
             }
             );
@@ -157,7 +173,12 @@ const CreateReviewPage = () => {
                 {!isChecked &&
                     <div>
                         <div className="Search-review-item-block">
-                            <input name="search" placeholder="Предмет отзыва" value={searchItemName} onChange={(event) => setSearchItemName(event.target.value)}/>
+                            <div className="Search-input-block">
+                                {searchErrorMessage && <p className="Error-message Form-input-error-message Search-error-message">{searchErrorMessage}</p>}
+                                {fieldsErrors.itemId && <p className="Error-message Form-input-error-message Search-error-message">{fieldsErrors.itemId[0]}</p>}
+                                <input name="search" placeholder="Предмет отзыва" value={searchItemName} onChange={(event) => setSearchItemName(event.target.value)}/>
+                            </div>
+                            
                             <button className="Action-btn" onClick={searchReviewItems}>Найти</button>
                         </div>
 
@@ -178,6 +199,7 @@ const CreateReviewPage = () => {
                 <form onSubmit={handleCreateReview} className="Create-review-form">
                     {isChecked &&
                         <div>
+                            {fieldsErrors.itemName && <p className="Error-message Form-input-error-message Search-error-message">{fieldsErrors.itemName[0]}</p>}
                             <input name="object_name" placeholder="Предмет отзыва" value={itemName} onChange={(event) => setItemName(event.target.value)}/>
                         </div>
                     }
@@ -197,7 +219,7 @@ const CreateReviewPage = () => {
                         </select>
                     </div>
                     
-                    
+                    {fieldsErrors.rating && <p className="Error-message Rating-error-message">{fieldsErrors.rating[0]}</p>}
                     <div className="Rating-block">
                         <p>Поставьте оценку:</p>
                         <div className="Rating-area">
@@ -221,16 +243,20 @@ const CreateReviewPage = () => {
                     
 
                     <div>
+                        {fieldsErrors.advantages && <p className="Error-message Form-input-error-message Create-review-error-message">{fieldsErrors.advantages[0]}</p>}
                         <textarea type="text" name="advantages" placeholder="Достоинства" value={advantages} onChange={(event) => setAdvantages(event.target.value)}/>
                     </div>
 
                     <div>
+                        {fieldsErrors.disadvantages && <p className="Error-message Form-input-error-message Create-review-error-message">{fieldsErrors.disadvantages[0]}</p>}
                         <textarea name="disadvantages" placeholder="Недостатки" value={disadvantages} onChange={(event) => setDisadvantages(event.target.value)}/>
                     </div>
 
                     <div>
+                        {(fieldsErrors.note && (fieldsErrors.advantages || fieldsErrors.disadvantages)) && <p className="Error-message Form-input-error-message Create-review-error-message">{fieldsErrors.note[0]}</p>}
                         <textarea name="note" placeholder="Комментарий" value={note} onChange={(event) => setNote(event.target.value)}/>
                     </div>
+                    {fieldsErrors.note && <p className="Error-message Form-input-error-message Create-review-error-message">{fieldsErrors.note[0]}</p>}
 
                     <button type="submit" className="Action-btn">Создать отзыв</button>
                 </form>

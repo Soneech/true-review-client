@@ -147,4 +147,14 @@
     gap: 8px;
     justify-content: center;
 }
+
+.Rating-error-messag {
+    text-align: center;
+}
+
+.Create-review-error-message {
+    margin-left: 5.5vw;
+}
+
+
   
